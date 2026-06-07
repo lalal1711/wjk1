@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="2026 免费 AI API 终极指南：聚合全网 13+ 主流平台，每月最高可获 16 亿 Token，零成本实现大模型自由。包含完整的服务器部署与 systemd 守护进程配置教程。">
 <title>2026 免费 AI API 终极指南</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
@@ -138,9 +139,7 @@
     animation: fadeDown 0.6s 0.3s ease both;
   }
 
-  .stat {
-    text-align: center;
-  }
+  .stat { text-align: center; }
 
   .stat-num {
     font-family: 'JetBrains Mono', monospace;
@@ -416,6 +415,13 @@
     overflow-x: auto;
   }
 
+  .config-block pre {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+  }
+
   .config-block .key { color: #e06c75; }
   .config-block .val { color: #98c379; }
   .config-block .section { color: #56b6c2; }
@@ -511,6 +517,15 @@
     transform: translateY(0);
   }
 
+  /* ─── JS DISABLED FALLBACK ─── */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(20px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  }
+
+  .no-js .reveal,
+  .reveal.visible { opacity: 1; transform: none; }
+
   /* ─── TOC ─── */
   .toc {
     background: var(--card);
@@ -558,6 +573,7 @@
     .step { flex-direction: column; gap: 10px; }
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -595,6 +611,7 @@
     <a href="#apis">全网免费 API 渠道盘点</a>
     <a href="#deploy">服务器部署教程</a>
     <a href="#daemon">后台守护进程配置</a>
+    <a href="#security">安全加固（非 root + HTTPS）</a>
     <a href="#update">更新步骤</a>
   </nav>
 
@@ -606,7 +623,7 @@
       <p>想要自己动手搭建 AI 应用、测试大模型，却总是被高昂的 API 账单或 <code style="background:#1c2430;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#e06c75;">429</code> 限流错误劝退？</p>
       <br>
       <p>这个项目能把从各家平台申请到的免费 API 额度，全部聚合成一个<strong style="color:#fff;">「无限 Token 池」</strong>（完美兼容 OpenAI 格式），支持自动切换和负载均衡，整合下来每月免费 Token 总量高达 <strong style="color:var(--accent);">16 亿</strong>。</p>
-      <a href="https://github.com/tashfeenahmed/freellmapi" target="_blank" class="project-link">
+      <a href="https://github.com/tashfeenahmed/freellmapi" target="_blank" rel="noopener noreferrer" class="project-link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         tashfeenahmed/freellmapi
       </a>
@@ -629,7 +646,7 @@
           <span class="tier-badge tier-core">必选</span>
         </div>
         <div class="api-desc">Gemini 系列，免费额度天花板。支持超长上下文，调用频率极高，综合性价比第一。</div>
-        <a href="https://aistudio.google.com/" target="_blank" class="api-link">↗ aistudio.google.com</a>
+        <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="api-link">↗ aistudio.google.com</a>
       </div>
 
       <div class="api-card">
@@ -638,7 +655,7 @@
           <span class="tier-badge tier-speed">极速</span>
         </div>
         <div class="api-desc">自研 LPU 芯片，全网推理速度最快，延迟极低，对速度敏感的场景首选。</div>
-        <a href="https://console.groq.com/" target="_blank" class="api-link">↗ console.groq.com</a>
+        <a href="https://console.groq.com/" target="_blank" rel="noopener noreferrer" class="api-link">↗ console.groq.com</a>
       </div>
 
       <div class="api-card">
@@ -647,7 +664,7 @@
           <span class="tier-badge tier-core">程序员</span>
         </div>
         <div class="api-desc">程序员专属羊毛，有 GitHub 账号即可免费调用 GPT-4o 等顶级模型，无需信用卡。</div>
-        <a href="https://github.com/marketplace/models" target="_blank" class="api-link">↗ github.com/marketplace/models</a>
+        <a href="https://github.com/marketplace/models" target="_blank" rel="noopener noreferrer" class="api-link">↗ github.com/marketplace/models</a>
       </div>
 
       <div class="api-card">
@@ -655,7 +672,7 @@
           🔀 OpenRouter
         </div>
         <div class="api-desc">最强聚合平台，「Free Models」专区常有限免惊喜，一个接口访问数十家模型。</div>
-        <a href="https://openrouter.ai/" target="_blank" class="api-link">↗ openrouter.ai</a>
+        <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="api-link">↗ openrouter.ai</a>
       </div>
 
       <div class="api-card">
@@ -663,7 +680,7 @@
           🇪🇺 Mistral AI
         </div>
         <div class="api-desc">欧洲之光，提供优质的免费 Experiment 试用计划，开源模型中质量拔尖。</div>
-        <a href="https://console.mistral.ai/" target="_blank" class="api-link">↗ console.mistral.ai</a>
+        <a href="https://console.mistral.ai/" target="_blank" rel="noopener noreferrer" class="api-link">↗ console.mistral.ai</a>
       </div>
 
       <div class="api-card">
@@ -671,7 +688,7 @@
           🤝 Together AI
         </div>
         <div class="api-desc">最强开源云算力，注册赠送额度，部分小参数模型完全免费，支持微调。</div>
-        <a href="https://api.together.ai/" target="_blank" class="api-link">↗ api.together.ai</a>
+        <a href="https://api.together.ai/" target="_blank" rel="noopener noreferrer" class="api-link">↗ api.together.ai</a>
       </div>
 
       <div class="api-card">
@@ -679,7 +696,7 @@
           🟢 NVIDIA NIM
         </div>
         <div class="api-desc">英伟达官方免费算力，跑分极高，适合高强度逻辑推理测试。</div>
-        <a href="https://build.nvidia.com/" target="_blank" class="api-link">↗ build.nvidia.com</a>
+        <a href="https://build.nvidia.com/" target="_blank" rel="noopener noreferrer" class="api-link">↗ build.nvidia.com</a>
       </div>
 
       <div class="api-card">
@@ -687,7 +704,7 @@
           📝 Cohere
         </div>
         <div class="api-desc">RAG 与文本处理专家，开发者永久免费试用 Key，企业级 Embed 能力。</div>
-        <a href="https://dashboard.cohere.com/" target="_blank" class="api-link">↗ dashboard.cohere.com</a>
+        <a href="https://dashboard.cohere.com/" target="_blank" rel="noopener noreferrer" class="api-link">↗ dashboard.cohere.com</a>
       </div>
 
       <div class="api-card">
@@ -695,7 +712,7 @@
           🤗 Hugging Face
         </div>
         <div class="api-desc">开源社区大本营，海量模型免部署直接调用，最全的开源模型库。</div>
-        <a href="https://huggingface.co/settings/tokens" target="_blank" class="api-link">↗ huggingface.co</a>
+        <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer" class="api-link">↗ huggingface.co</a>
       </div>
 
       <div class="api-card">
@@ -704,7 +721,7 @@
           <span class="tier-badge tier-speed">最快</span>
         </div>
         <div class="api-desc">全网推理速度天花板，每秒可输出上千 Token，专攻 Llama 3 系列极速推理。</div>
-        <a href="https://cloud.cerebras.ai/" target="_blank" class="api-link">↗ cloud.cerebras.ai</a>
+        <a href="https://cloud.cerebras.ai/" target="_blank" rel="noopener noreferrer" class="api-link">↗ cloud.cerebras.ai</a>
       </div>
 
       <div class="api-card">
@@ -713,7 +730,7 @@
           <span class="tier-badge tier-speed">大模型</span>
         </div>
         <div class="api-desc">堆算力的狂魔，提供极高配的开源大模型免费调用，Llama 系列表现出色。</div>
-        <a href="https://cloud.sambanova.ai/" target="_blank" class="api-link">↗ cloud.sambanova.ai</a>
+        <a href="https://cloud.sambanova.ai/" target="_blank" rel="noopener noreferrer" class="api-link">↗ cloud.sambanova.ai</a>
       </div>
 
       <div class="api-card">
@@ -721,7 +738,7 @@
           ☁️ Cloudflare Workers AI
         </div>
         <div class="api-desc">白嫖 CF 遍布全球的边缘计算节点，每天有免费额度，有 CF 账号即可开启。</div>
-        <a href="https://dash.cloudflare.com/" target="_blank" class="api-link">↗ dash.cloudflare.com</a>
+        <a href="https://dash.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="api-link">↗ dash.cloudflare.com</a>
       </div>
 
       <div class="api-card">
@@ -730,7 +747,7 @@
           <span class="tier-badge tier-cn">国产首选</span>
         </div>
         <div class="api-desc">国产大模型第一梯队（GLM 系列）。新用户注册豪送 Token，GLM-4-Flash 完全免费。</div>
-        <a href="https://open.bigmodel.cn/" target="_blank" class="api-link">↗ open.bigmodel.cn</a>
+        <a href="https://open.bigmodel.cn/" target="_blank" rel="noopener noreferrer" class="api-link">↗ open.bigmodel.cn</a>
       </div>
 
       <div class="api-card">
@@ -738,7 +755,7 @@
           🦙 Ollama Cloud
         </div>
         <div class="api-desc">在线版 Ollama，无需本地显卡即可访问开源模型，适合轻量级应用场景。</div>
-        <a href="https://ollama.com/" target="_blank" class="api-link">↗ ollama.com</a>
+        <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer" class="api-link">↗ ollama.com</a>
       </div>
 
     </div>
@@ -796,15 +813,15 @@ git clone https://github.com/tashfeenahmed/freellmapi.git
 cd freellmapi
 npm install
 
-<span class="comment"># 配置环境变量</span>
+<span class="comment"># 配置环境变量（使用单引号包裹外层，避免双引号嵌套报错）</span>
 cp .env.example .env
-echo "ENCRYPTION_KEY=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")" >> .env
+sed -i "s/^ENCRYPTION_KEY=.*/ENCRYPTION_KEY=$(node -e 'console.log(require("crypto").randomBytes(32).toString("hex"))')/" .env
 
 <span class="comment"># 构建项目</span>
 npm run build
 
 <span class="comment"># 启动（验证是否正常）</span>
-npm run dev</pre>
+npm start</pre>
         </div>
         <div class="callout">
           <span class="callout-icon">💡</span>
@@ -840,22 +857,27 @@ npm run dev</pre>
       <div class="step-num">02</div>
       <div class="step-content">
         <h3>填入服务配置</h3>
+        <p style="color:var(--text-dim);margin-bottom:12px;font-size:14px;">直接复制以下内容，每行指令独立，无行尾注释，systemd 可正确解析。</p>
         <div class="config-block">
-<span class="section">[Unit]</span>
+<pre><span class="section">[Unit]</span>
 <span class="key">Description</span>=FreeLLMAPI Proxy Service
-<span class="key">After</span>=network.target
+<span class="key">After</span>=network-online.target
+<span class="key">Wants</span>=network-online.target
 
 <span class="section">[Service]</span>
 <span class="key">Type</span>=simple
 <span class="key">User</span>=root
 <span class="key">WorkingDirectory</span>=<span class="val">/opt/freellmapi</span>
-<span class="key">ExecStart</span>=<span class="val">/usr/bin/npm run dev</span>
+<span class="cmt"># 生产环境直接调用 node 运行构建产物，避免 npm 包装进程导致管理失控</span>
+<span class="key">ExecStart</span>=<span class="val">/usr/bin/node /opt/freellmapi/dist/index.js</span>
 <span class="key">Restart</span>=always
 <span class="key">RestartSec</span>=5
-<span class="key">Environment</span>=<span class="val">PORT=3001</span>    <span class="cmt"># 默认面板端口</span>
+<span class="cmt"># 默认面板端口</span>
+<span class="key">Environment</span>=<span class="val">"PORT=3001"</span>
+<span class="key">Environment</span>=<span class="val">"NODE_ENV=production"</span>
 
 <span class="section">[Install]</span>
-<span class="key">WantedBy</span>=multi-user.target
+<span class="key">WantedBy</span>=multi-user.target</pre>
         </div>
       </div>
     </div>
@@ -887,6 +909,111 @@ sudo systemctl status freellmapi</pre>
 
   <hr class="divider">
 
+  <!-- ─── SECURITY ─── -->
+  <section id="security" class="reveal">
+    <div class="section-label">// 安全加固</div>
+    <h2 class="section-title">生产环境必做：非 root 运行 + HTTPS</h2>
+    <p style="color:var(--text-dim);margin-bottom:28px;">服务直接跑在 root 下且暴露 HTTP，一旦出问题就是整台服务器被黑。以下两步是个人用户最低安全基线。</p>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>创建专用用户（权限隔离）</h3>
+        <p style="color:var(--text-dim);margin-bottom:12px;font-size:14px;">Node 服务以 root 运行，被入侵即整台服务器沦陷。专用用户把权限锁死在项目目录里。</p>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+            <span class="code-lang">bash</span>
+          </div>
+<pre><span class="comment"># 创建无登录权限的专用用户</span>
+sudo useradd -r -s /bin/false freellmapi
+
+<span class="comment"># 把项目目录所有权交给他</span>
+sudo chown -R freellmapi:freellmapi /opt/freellmapi
+
+<span class="comment"># 修改 systemd 配置中的 User 和 Group</span>
+sudo sed -i 's/^User=root/User=freellmapi/' /etc/systemd/system/freellmapi.service
+sudo sed -i 's/^Group=.*/Group=freellmapi/' /etc/systemd/system/freellmapi.service
+
+<span class="comment"># 重载并重启</span>
+sudo systemctl daemon-reload
+sudo systemctl restart freellmapi
+sudo systemctl status freellmapi</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Nginx 反向代理 + SSL（HTTPS 加密）</h3>
+        <p style="color:var(--text-dim);margin-bottom:12px;font-size:14px;">直接暴露 <code style="font-family:'JetBrains Mono',monospace;">http://IP:3001</code> 会导致 API Key 和对话内容明文传输，且很多客户端拒绝纯 HTTP 连接。</p>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+            <span class="code-lang">bash</span>
+          </div>
+<pre><span class="comment"># 安装 Nginx 和 Certbot</span>
+sudo apt update
+sudo apt install nginx certbot python3-certbot-nginx -y
+
+<span class="comment"># 申请免费 SSL 证书（把 api.yourdomain.com 换成你的域名）</span>
+sudo certbot --nginx -d api.yourdomain.com</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+            <span class="code-lang">nginx</span>
+          </div>
+<pre>server {
+    listen 80;
+    server_name api.yourdomain.com;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name api.yourdomain.com;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        proxy_pass http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+            <span class="code-lang">bash</span>
+          </div>
+<pre><span class="comment"># 启用配置并测试</span>
+sudo ln -s /etc/nginx/sites-available/freellmapi /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+
+<span class="comment"># 防火墙只开放必要端口</span>
+sudo ufw default deny incoming
+sudo ufw allow 22/tcp    <span class="comment"># SSH</span>
+sudo ufw allow 80/tcp    <span class="comment"># HTTP</span>
+sudo ufw allow 443/tcp   <span class="comment"># HTTPS</span>
+sudo ufw enable</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- ─── UPDATE ─── -->
   <section id="update" class="reveal">
     <div class="section-label">// 维护</div>
@@ -913,7 +1040,7 @@ sudo systemctl start freellmapi</pre>
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <p>内容整理自 <a href="https://eianunbits.blogspot.com/" target="_blank">Eianun科技碎片</a> · 通过 Cloudflare Pages 独立部署</p>
+  <p>内容整理自 <a href="https://eianunbits.blogspot.com/" target="_blank" rel="noopener noreferrer">Eianun科技碎片</a> · 通过 Cloudflare Pages 独立部署</p>
 </footer>
 
 <script>
