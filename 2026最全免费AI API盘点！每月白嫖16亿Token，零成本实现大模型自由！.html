@@ -1,0 +1,3231 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html -->
+<html dir="ltr" lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr"><script id="allow-copy_script">(function agent() {
+    let unlock = false
+    document.addEventListener('allow_copy', (event) => {
+      unlock = event.detail.unlock
+    })
+
+    const copyEvents = [
+      'copy',
+      'cut',
+      'contextmenu',
+      'selectstart',
+      'mousedown',
+      'mouseup',
+      'mousemove',
+      'keydown',
+      'keypress',
+      'keyup',
+    ]
+    const rejectOtherHandlers = (e) => {
+      if (unlock) {
+        e.stopPropagation()
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation()
+      }
+    }
+    copyEvents.forEach((evt) => {
+      document.documentElement.addEventListener(evt, rejectOtherHandlers, {
+        capture: true,
+      })
+    })
+  })()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！</title>
+
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#f8f8f8" name="theme-color">
+<!-- Windows Phone -->
+<meta content="#f8f8f8" name="msapplication-navbutton-color">
+<meta content="blogger" name="generator">
+<link href="https://eianunbits.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Eianun科技碎片 - Atom" href="https://eianunbits.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Eianun科技碎片 - RSS" href="https://eianunbits.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Eianun科技碎片 - Atom" href="https://draft.blogger.com/feeds/1851036973524076163/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Eianun科技碎片 - Atom" href="https://eianunbits.blogspot.com/feeds/4146422131100989183/comments/default">
+<!--Can't find substitution for tag [blog.ieCssRetrofitLinks]-->
+<meta content="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" property="og:url">
+<meta content="2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！" property="og:title">
+<meta content="想要自己动手搭建 AI 应用、测试大模型，却总是被高昂的 API 计费账单或者 429（请求超限）错误劝退？很多折腾过 sub2api 或 newapi 这类传统中转站的玩家都知道，手动去维护不同平台的渠道连通性有多头疼，而且单独一家的免费额度根本不够用。 FreeLLMAPI ..." property="og:description">
+<style type="text/css">@font-face{font-family:'Damion';font-style:normal;font-weight:400;font-display:swap;src:url(//fonts.gstatic.com/s/damion/v15/hv-XlzJ3KEUe_YZkZGw2ATE.woff2)format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Damion';font-style:normal;font-weight:400;font-display:swap;src:url(//fonts.gstatic.com/s/damion/v15/hv-XlzJ3KEUe_YZkamw2.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:swap;src:url(//fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKfsunDTbtPY_Q.woff2)format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:swap;src:url(//fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKfsunDYbtPY_Q.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:swap;src:url(//fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKfsunDZbtPY_Q.woff2)format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:swap;src:url(//fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKfsunDXbtM.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAX-k2Qn.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAz-k2Qn.woff2)format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAT-k2Qn.woff2)format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAv-k2Qn.woff2)format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuHT-k2Qn.woff2)format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuGb-k2Qn.woff2)format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAf-k2Qn.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAb-k2Qn.woff2)format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLt_QuAj-kw.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBGEe.woff2)format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBGEe.woff2)format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBGEe.woff2)format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBGEe.woff2)format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBGEe.woff2)format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBGEe.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBGEe.woff2)format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBGEe.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBGEe.woff2)format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBGEe.woff2)format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBGEe.woff2)format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBGEe.woff2)format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBGEe.woff2)format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBGEe.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBGEe.woff2)format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(//fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}</style>
+<style id="page-skin-1" type="text/css"><!--
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-0.25em}sup{top:-0.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,[type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px}[type="search"]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}
+/*!************************************************
+* Blogger Template Style
+* Name: Essential
+**************************************************/
+body{
+overflow-wrap:break-word;
+word-break:break-word;
+word-wrap:break-word
+}
+.hidden{
+display:none
+}
+.invisible{
+visibility:hidden
+}
+.container:after,.float-container:after{
+clear:both;
+content:"";
+display:table
+}
+.clearboth{
+clear:both
+}
+#comments .comment .comment-actions,.subscribe-popup .FollowByEmail .follow-by-email-submit,.widget.Profile .profile-link,.widget.Profile .profile-link.visit-profile{
+background:transparent;
+border:0;
+box-shadow:none;
+color:#397ff4;
+cursor:pointer;
+font-size:14px;
+font-weight:700;
+outline:none;
+text-decoration:none;
+text-transform:uppercase;
+width:auto
+}
+.dim-overlay{
+height:100vh;
+left:0;
+position:fixed;
+top:0;
+width:100%
+}
+#sharing-dim-overlay{
+background-color:transparent
+}
+input::-ms-clear{
+display:none
+}
+.blogger-logo,.svg-icon-24.blogger-logo{
+fill:#ff9800;
+opacity:1
+}
+.loading-spinner-large{
+-webkit-animation:mspin-rotate 1568.63ms linear infinite;
+animation:mspin-rotate 1568.63ms linear infinite;
+height:48px;
+overflow:hidden;
+position:absolute;
+width:48px;
+z-index:200
+}
+.loading-spinner-large>div{
+-webkit-animation:mspin-revrot 5332ms steps(4) infinite;
+animation:mspin-revrot 5332ms steps(4) infinite
+}
+.loading-spinner-large>div>div{
+-webkit-animation:mspin-singlecolor-large-film 1333ms steps(81) infinite;
+animation:mspin-singlecolor-large-film 1333ms steps(81) infinite;
+background-size:100%;
+height:48px;
+width:3888px
+}
+.mspin-black-large>div>div,.mspin-grey_54-large>div>div{
+background-image:url(https://www.blogblog.com/indie/mspin_black_large.svg)
+}
+.mspin-white-large>div>div{
+background-image:url(https://www.blogblog.com/indie/mspin_white_large.svg)
+}
+.mspin-grey_54-large{
+opacity:.54
+}
+@-webkit-keyframes mspin-singlecolor-large-film{
+0%{
+-webkit-transform:translateX(0);
+transform:translateX(0)
+}
+to{
+-webkit-transform:translateX(-3888px);
+transform:translateX(-3888px)
+}
+}
+@keyframes mspin-singlecolor-large-film{
+0%{
+-webkit-transform:translateX(0);
+transform:translateX(0)
+}
+to{
+-webkit-transform:translateX(-3888px);
+transform:translateX(-3888px)
+}
+}
+@-webkit-keyframes mspin-rotate{
+0%{
+-webkit-transform:rotate(0deg);
+transform:rotate(0deg)
+}
+to{
+-webkit-transform:rotate(1turn);
+transform:rotate(1turn)
+}
+}
+@keyframes mspin-rotate{
+0%{
+-webkit-transform:rotate(0deg);
+transform:rotate(0deg)
+}
+to{
+-webkit-transform:rotate(1turn);
+transform:rotate(1turn)
+}
+}
+@-webkit-keyframes mspin-revrot{
+0%{
+-webkit-transform:rotate(0deg);
+transform:rotate(0deg)
+}
+to{
+-webkit-transform:rotate(-1turn);
+transform:rotate(-1turn)
+}
+}
+@keyframes mspin-revrot{
+0%{
+-webkit-transform:rotate(0deg);
+transform:rotate(0deg)
+}
+to{
+-webkit-transform:rotate(-1turn);
+transform:rotate(-1turn)
+}
+}
+.skip-navigation{
+background-color:#fff;
+box-sizing:border-box;
+color:#000;
+display:block;
+height:0;
+left:0;
+line-height:50px;
+overflow:hidden;
+padding-top:0;
+position:fixed;
+text-align:center;
+top:0;
+-webkit-transition:box-shadow .3s,height .3s,padding-top .3s;
+transition:box-shadow .3s,height .3s,padding-top .3s;
+width:100%;
+z-index:900
+}
+.skip-navigation:focus{
+box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
+height:50px
+}
+#main{
+outline:none
+}
+.main-heading{
+position:absolute;
+clip:rect(1px,1px,1px,1px);
+padding:0;
+border:0;
+height:1px;
+width:1px;
+overflow:hidden
+}
+.Attribution{
+margin-top:1em;
+text-align:center
+}
+.Attribution .blogger img,.Attribution .blogger svg{
+vertical-align:bottom
+}
+.Attribution .blogger img{
+margin-right:.5em
+}
+.Attribution div{
+line-height:24px;
+margin-top:.5em
+}
+.Attribution .copyright,.Attribution .image-attribution{
+font-size:.7em;
+margin-top:1.5em
+}
+.BLOG_mobile_video_class{
+display:none
+}
+.bg-photo{
+background-attachment:scroll!important
+}
+body .CSS_LIGHTBOX{
+z-index:900
+}
+.extendable .show-less,.extendable .show-more{
+border-color:#397ff4;
+color:#397ff4;
+margin-top:8px
+}
+.extendable .show-less.hidden,.extendable .show-more.hidden,.inline-ad{
+display:none
+}
+.inline-ad{
+max-width:100%;
+overflow:hidden
+}
+.adsbygoogle{
+display:block
+}
+#cookieChoiceInfo{
+bottom:0;
+top:auto
+}
+iframe.b-hbp-video{
+border:0
+}
+.post-body iframe,.post-body img{
+max-width:100%
+}
+.post-body a[imageanchor=\31]{
+display:inline-block
+}
+.byline{
+margin-right:1em
+}
+.byline:last-child{
+margin-right:0
+}
+.link-copied-dialog{
+max-width:520px;
+outline:0
+}
+.link-copied-dialog .modal-dialog-buttons{
+margin-top:8px
+}
+.link-copied-dialog .goog-buttonset-default{
+background:transparent;
+border:0
+}
+.link-copied-dialog .goog-buttonset-default:focus{
+outline:0
+}
+.paging-control-container{
+margin-bottom:16px
+}
+.paging-control-container .paging-control{
+display:inline-block
+}
+.paging-control-container .comment-range-text:after,.paging-control-container .paging-control{
+color:#397ff4
+}
+.paging-control-container .comment-range-text,.paging-control-container .paging-control{
+margin-right:8px
+}
+.paging-control-container .comment-range-text:after,.paging-control-container .paging-control:after{
+content:"\b7";
+cursor:default;
+padding-left:8px;
+pointer-events:none
+}
+.paging-control-container .comment-range-text:last-child:after,.paging-control-container .paging-control:last-child:after{
+content:none
+}
+.byline.reactions iframe{
+height:20px
+}
+.b-notification{
+color:#000;
+background-color:#fff;
+border-bottom:1px solid #000;
+box-sizing:border-box;
+padding:16px 32px;
+text-align:center
+}
+.b-notification.visible{
+-webkit-transition:margin-top .3s cubic-bezier(.4,0,.2,1);
+transition:margin-top .3s cubic-bezier(.4,0,.2,1)
+}
+.b-notification.invisible{
+position:absolute
+}
+.b-notification-close{
+position:absolute;
+right:8px;
+top:8px
+}
+.no-posts-message{
+line-height:40px;
+text-align:center
+}
+@media screen and (max-width:800px){
+body.item-view .post-body a[imageanchor=\31][style*=float\:\ left\;],body.item-view .post-body a[imageanchor=\31][style*=float\:\ right\;]{
+float:none!important;
+clear:none!important
+}
+body.item-view .post-body a[imageanchor=\31] img{
+display:block;
+height:auto;
+margin:0 auto
+}
+body.item-view .post-body>.separator:first-child>a[imageanchor=\31]:first-child{
+margin-top:20px
+}
+.post-body a[imageanchor]{
+display:block
+}
+body.item-view .post-body a[imageanchor=\31]{
+margin-left:0!important;
+margin-right:0!important
+}
+body.item-view .post-body a[imageanchor=\31]+a[imageanchor=\31]{
+margin-top:16px
+}
+}
+.item-control{
+display:none
+}
+#comments{
+border-top:1px dashed rgba(0,0,0,.54);
+margin-top:20px;
+padding:20px
+}
+#comments .comment-thread ol{
+margin:0;
+padding-left:0;
+padding-left:0
+}
+#comments .comment-thread .comment-replies,#comments .comment .comment-replybox-single{
+margin-left:60px
+}
+#comments .comment-thread .thread-count{
+display:none
+}
+#comments .comment{
+list-style-type:none;
+padding:0 0 30px;
+position:relative
+}
+#comments .comment .comment{
+padding-bottom:8px
+}
+.comment .avatar-image-container{
+position:absolute
+}
+.comment .avatar-image-container img{
+border-radius:50%
+}
+.avatar-image-container svg,.comment .avatar-image-container .avatar-icon{
+border-radius:50%;
+border:1px solid #828282;
+box-sizing:border-box;
+fill:#828282;
+height:35px;
+margin:0;
+padding:7px;
+width:35px
+}
+.comment .comment-block{
+margin-top:10px;
+margin-left:60px;
+padding-bottom:0
+}
+#comments .comment-author-header-wrapper{
+margin-left:40px
+}
+#comments .comment .thread-expanded .comment-block{
+padding-bottom:20px
+}
+#comments .comment .comment-header .user,#comments .comment .comment-header .user a{
+color:#676767;
+font-style:normal;
+font-weight:700
+}
+#comments .comment .comment-actions{
+bottom:0;
+margin-bottom:15px;
+position:absolute
+}
+#comments .comment .comment-actions>*{
+margin-right:8px
+}
+#comments .comment .comment-header .datetime{
+bottom:0;
+display:inline-block;
+font-size:13px;
+font-style:italic;
+margin-left:8px
+}
+#comments .comment .comment-footer .comment-timestamp a,#comments .comment .comment-header .datetime,#comments .comment .comment-header .datetime a{
+color:rgba(103,103,103,.54)
+}
+#comments .comment .comment-content,.comment .comment-body{
+margin-top:12px;
+word-break:break-word
+}
+.comment-body{
+margin-bottom:12px
+}
+#comments.embed[data-num-comments=\30]{
+border:0;
+margin-top:0;
+padding-top:0
+}
+#comment-editor-src,#comments.embed[data-num-comments=\30] #comment-post-message,#comments.embed[data-num-comments=\30] div.comment-form>p,#comments.embed[data-num-comments=\30] p.comment-footer{
+display:none
+}
+.comments .comments-content .loadmore.loaded{
+max-height:0;
+opacity:0;
+overflow:hidden
+}
+.extendable .remaining-items{
+height:0;
+overflow:hidden;
+-webkit-transition:height .3s cubic-bezier(.4,0,.2,1);
+transition:height .3s cubic-bezier(.4,0,.2,1)
+}
+.extendable .remaining-items.expanded{
+height:auto
+}
+.svg-icon-24,.svg-icon-24-button{
+cursor:pointer;
+height:24px;
+width:24px;
+min-width:24px
+}
+.touch-icon{
+margin:-12px;
+padding:12px
+}
+.touch-icon:active,.touch-icon:focus{
+background-color:hsla(0,0%,60%,.4);
+border-radius:50%
+}
+svg:not(:root).touch-icon{
+overflow:visible
+}
+html[dir=rtl] .rtl-reversible-icon{
+-webkit-transform:scaleX(-1);
+transform:scaleX(-1)
+}
+.svg-icon-24-button,.touch-icon-button{
+background:transparent;
+border:0;
+margin:0;
+outline:none;
+padding:0
+}
+.touch-icon-button .touch-icon:active,.touch-icon-button .touch-icon:focus{
+background-color:transparent
+}
+.touch-icon-button:active .touch-icon,.touch-icon-button:focus .touch-icon{
+background-color:hsla(0,0%,60%,.4);
+border-radius:50%
+}
+.Profile .default-avatar-wrapper .avatar-icon{
+border-radius:50%;
+border:1px solid #828282;
+box-sizing:border-box;
+fill:#828282;
+margin:0
+}
+.Profile .individual .default-avatar-wrapper .avatar-icon{
+padding:25px
+}
+.Profile .individual .avatar-icon,.Profile .individual .profile-img{
+height:120px;
+width:120px
+}
+.Profile .team .default-avatar-wrapper .avatar-icon{
+padding:8px
+}
+.Profile .team .avatar-icon,.Profile .team .default-avatar-wrapper,.Profile .team .profile-img{
+height:40px;
+width:40px
+}
+.snippet-container{
+margin:0;
+position:relative;
+overflow:hidden
+}
+.snippet-fade{
+bottom:0;
+box-sizing:border-box;
+position:absolute;
+width:96px;
+right:0
+}
+.snippet-fade:after{
+content:"\2026";
+float:right
+}
+.post-bottom{
+-webkit-box-align:center;
+align-items:center;
+display:-webkit-box;
+display:flex;
+flex-wrap:wrap
+}
+.post-footer{
+-webkit-box-flex:1;
+flex:1 1 auto;
+flex-wrap:wrap;
+-webkit-box-ordinal-group:2;
+order:1
+}
+.post-footer>*{
+-webkit-box-flex:0;
+flex:0 1 auto
+}
+.post-footer .byline:last-child{
+margin-right:1em
+}
+.jump-link{
+-webkit-box-flex:0;
+flex:0 0 auto;
+-webkit-box-ordinal-group:3;
+order:2
+}
+.centered-top-container.sticky{
+left:0;
+position:fixed;
+right:0;
+top:0;
+width:auto;
+z-index:50;
+-webkit-transition-property:opacity,-webkit-transform;
+transition-property:opacity,-webkit-transform;
+transition-property:transform,opacity;
+transition-property:transform,opacity,-webkit-transform;
+-webkit-transition-duration:.2s;
+transition-duration:.2s;
+-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);
+transition-timing-function:cubic-bezier(.4,0,.2,1)
+}
+.centered-top-placeholder{
+display:none
+}
+.collapsed-header .centered-top-placeholder{
+display:block
+}
+.centered-top-container .Header .replaced h1,.centered-top-placeholder .Header .replaced h1{
+display:none
+}
+.centered-top-container.sticky .Header .replaced h1{
+display:block
+}
+.centered-top-container.sticky .Header .header-widget{
+background:none
+}
+.centered-top-container.sticky .Header .header-image-wrapper{
+display:none
+}
+.centered-top-container img,.centered-top-placeholder img{
+max-width:100%
+}
+.collapsible{
+-webkit-transition:height .3s cubic-bezier(.4,0,.2,1);
+transition:height .3s cubic-bezier(.4,0,.2,1)
+}
+.collapsible,.collapsible>summary{
+display:block;
+overflow:hidden
+}
+.collapsible>:not(summary){
+display:none
+}
+.collapsible[open]>:not(summary){
+display:block
+}
+.collapsible:focus,.collapsible>summary:focus{
+outline:none
+}
+.collapsible>summary{
+cursor:pointer;
+display:block;
+padding:0
+}
+.collapsible:focus>summary,.collapsible>summary:focus{
+background-color:transparent
+}
+.collapsible>summary::-webkit-details-marker{
+display:none
+}
+.collapsible-title{
+-webkit-box-align:center;
+align-items:center;
+display:-webkit-box;
+display:flex
+}
+.collapsible-title .title{
+-webkit-box-flex:1;
+flex:1 1 auto;
+-webkit-box-ordinal-group:1;
+order:0;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
+}
+.collapsible-title .chevron-down,.collapsible[open] .collapsible-title .chevron-up{
+display:block
+}
+.collapsible-title .chevron-up,.collapsible[open] .collapsible-title .chevron-down{
+display:none
+}
+.flat-button{
+font-weight:700;
+text-transform:uppercase;
+border-radius:2px;
+padding:8px;
+margin:-8px
+}
+.flat-button,.flat-icon-button{
+cursor:pointer;
+display:inline-block
+}
+.flat-icon-button{
+background:transparent;
+border:0;
+outline:none;
+margin:-12px;
+padding:12px;
+box-sizing:content-box;
+line-height:0
+}
+.flat-icon-button,.flat-icon-button .splash-wrapper{
+border-radius:50%
+}
+.flat-icon-button .splash.animate{
+-webkit-animation-duration:.3s;
+animation-duration:.3s
+}
+.overflowable-container{
+max-height:46px;
+overflow:hidden;
+position:relative
+}
+.overflow-button{
+cursor:pointer
+}
+#overflowable-dim-overlay{
+background:transparent
+}
+.overflow-popup{
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+background-color:#ffffff;
+left:0;
+max-width:calc(100% - 32px);
+position:absolute;
+top:0;
+visibility:hidden;
+z-index:101
+}
+.overflow-popup ul{
+list-style:none
+}
+.overflow-popup .tabs li,.overflow-popup li{
+display:block;
+height:auto
+}
+.overflow-popup .tabs li{
+padding-left:0;
+padding-right:0
+}
+.overflow-button.hidden,.overflow-popup .tabs li.hidden,.overflow-popup li.hidden{
+display:none
+}
+.pill-button{
+background:transparent;
+border:1px solid;
+border-radius:12px;
+cursor:pointer;
+display:inline-block;
+padding:4px 16px;
+text-transform:uppercase
+}
+.ripple{
+position:relative
+}
+.ripple>*{
+z-index:1
+}
+.splash-wrapper{
+bottom:0;
+left:0;
+overflow:hidden;
+pointer-events:none;
+position:absolute;
+right:0;
+top:0;
+z-index:0
+}
+.splash{
+background:#ccc;
+border-radius:100%;
+display:block;
+opacity:.6;
+position:absolute;
+-webkit-transform:scale(0);
+transform:scale(0)
+}
+.splash.animate{
+-webkit-animation:ripple-effect .4s linear;
+animation:ripple-effect .4s linear
+}
+@-webkit-keyframes ripple-effect{
+to{
+opacity:0;
+-webkit-transform:scale(2.5);
+transform:scale(2.5)
+}
+}
+@keyframes ripple-effect{
+to{
+opacity:0;
+-webkit-transform:scale(2.5);
+transform:scale(2.5)
+}
+}
+.search{
+display:-webkit-box;
+display:flex;
+line-height:24px;
+width:24px
+}
+.search.focused,.search.focused .section{
+width:100%
+}
+.search form{
+z-index:101
+}
+.search h3{
+display:none
+}
+.search form{
+display:-webkit-box;
+display:flex;
+-webkit-box-flex:1;
+flex:1 0 0;
+border-bottom:1px solid transparent;
+padding-bottom:8px
+}
+.search form>*{
+display:none
+}
+.search.focused form>*{
+display:block
+}
+.search .search-input label{
+display:none
+}
+.collapsed-header .centered-top-container .search.focused form{
+border-bottom-color:transparent
+}
+.search-expand{
+-webkit-box-flex:0;
+flex:0 0 auto
+}
+.search-expand-text{
+display:none
+}
+.search-close{
+display:inline;
+vertical-align:middle
+}
+.search-input{
+-webkit-box-flex:1;
+flex:1 0 1px
+}
+.search-input input{
+background:none;
+border:0;
+box-sizing:border-box;
+color:#676767;
+display:inline-block;
+outline:none;
+width:calc(100% - 48px)
+}
+.search-input input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #676767
+}
+.collapsed-header .centered-top-container .search-action,.collapsed-header .centered-top-container .search-input input{
+color:#676767
+}
+.collapsed-header .centered-top-container .search-input input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #676767
+}
+.collapsed-header .centered-top-container .search-input input.no-cursor:focus,.search-input input.no-cursor:focus{
+outline:none
+}
+.search-focused>*{
+visibility:hidden
+}
+.search-focused .search,.search-focused .search-icon{
+visibility:visible
+}
+.widget.Sharing .sharing-button{
+display:none
+}
+.widget.Sharing .sharing-buttons li{
+padding:0
+}
+.widget.Sharing .sharing-buttons li span{
+display:none
+}
+.post-share-buttons{
+position:relative
+}
+.sharing-open.touch-icon-button:active .touch-icon,.sharing-open.touch-icon-button:focus .touch-icon{
+background-color:transparent
+}
+.share-buttons{
+background-color:#ffffff;
+border-radius:2px;
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+color:#424242;
+list-style:none;
+margin:0;
+padding:8px 0;
+position:absolute;
+top:-11px;
+min-width:200px;
+z-index:101
+}
+.share-buttons.hidden{
+display:none
+}
+.sharing-button{
+background:transparent;
+border:0;
+margin:0;
+outline:none;
+padding:0;
+cursor:pointer
+}
+.share-buttons li{
+margin:0;
+height:48px
+}
+.share-buttons li:last-child{
+margin-bottom:0
+}
+.share-buttons li .sharing-platform-button{
+box-sizing:border-box;
+cursor:pointer;
+display:block;
+height:100%;
+margin-bottom:0;
+padding:0 16px;
+position:relative;
+width:100%
+}
+.share-buttons li .sharing-platform-button:focus,.share-buttons li .sharing-platform-button:hover{
+background-color:hsla(0,0%,50.2%,.1);
+outline:none
+}
+.share-buttons li svg[class*=sharing-],.share-buttons li svg[class^=sharing-]{
+position:absolute;
+top:10px
+}
+.share-buttons li span.sharing-platform-button{
+position:relative;
+top:0
+}
+.share-buttons li .platform-sharing-text{
+display:block;
+font-size:16px;
+line-height:48px;
+white-space:nowrap;
+margin-left:56px
+}
+.sidebar-container{
+background-color:#ffffff;
+max-width:284px;
+overflow-y:auto;
+-webkit-transition-property:-webkit-transform;
+transition-property:-webkit-transform;
+transition-property:transform;
+transition-property:transform,-webkit-transform;
+-webkit-transition-duration:.3s;
+transition-duration:.3s;
+-webkit-transition-timing-function:cubic-bezier(0,0,.2,1);
+transition-timing-function:cubic-bezier(0,0,.2,1);
+width:284px;
+z-index:101;
+-webkit-overflow-scrolling:touch
+}
+.sidebar-container .navigation{
+line-height:0;
+padding:16px
+}
+.sidebar-container .sidebar-back{
+cursor:pointer
+}
+.sidebar-container .widget{
+background:none;
+margin:0 16px;
+padding:16px 0
+}
+.sidebar-container .widget .title{
+color:#676767;
+margin:0
+}
+.sidebar-container .widget ul{
+list-style:none;
+margin:0;
+padding:0
+}
+.sidebar-container .widget ul ul{
+margin-left:1em
+}
+.sidebar-container .widget li{
+font-size:16px;
+line-height:normal
+}
+.sidebar-container .widget+.widget{
+border-top:1px dashed #d2d2d2
+}
+.BlogArchive li{
+margin:16px 0
+}
+.BlogArchive li:last-child{
+margin-bottom:0
+}
+.Label li a{
+display:inline-block
+}
+.BlogArchive .post-count,.Label .label-count{
+float:right;
+margin-left:.25em
+}
+.BlogArchive .post-count:before,.Label .label-count:before{
+content:"("
+}
+.BlogArchive .post-count:after,.Label .label-count:after{
+content:")"
+}
+.widget.Translate .skiptranslate>div{
+display:block!important
+}
+.widget.Profile .profile-link{
+display:-webkit-box;
+display:flex
+}
+.widget.Profile .team-member .default-avatar-wrapper,.widget.Profile .team-member .profile-img{
+-webkit-box-flex:0;
+flex:0 0 auto;
+margin-right:1em
+}
+.widget.Profile .individual .profile-link{
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+flex-direction:column
+}
+.widget.Profile .team .profile-link .profile-name{
+align-self:center;
+display:block;
+-webkit-box-flex:1;
+flex:1 1 auto
+}
+.dim-overlay{
+background-color:rgba(0,0,0,.54);
+z-index:100
+}
+body.sidebar-visible{
+overflow-y:hidden
+}
+@media screen and (max-width:1439px){
+.sidebar-container{
+bottom:0;
+position:fixed;
+top:0;
+left:0;
+right:auto
+}
+.sidebar-container.sidebar-invisible{
+-webkit-transition-timing-function:cubic-bezier(.4,0,.6,1);
+transition-timing-function:cubic-bezier(.4,0,.6,1);
+-webkit-transform:translateX(-284px);
+transform:translateX(-284px)
+}
+}
+@media screen and (min-width:1440px){
+.sidebar-container{
+position:absolute;
+top:0;
+left:0;
+right:auto
+}
+.sidebar-container .navigation{
+display:none
+}
+}
+.dialog{
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+background:#ffffff;
+box-sizing:border-box;
+color:#868686;
+padding:30px;
+position:fixed;
+text-align:center;
+width:calc(100% - 24px);
+z-index:101
+}
+.dialog input[type=email],.dialog input[type=text]{
+background-color:transparent;
+border:0;
+border-bottom:1px solid rgba(134,134,134,.12);
+color:#868686;
+display:block;
+font-family:Roboto, sans-serif;
+font-size:16px;
+line-height:24px;
+margin:auto;
+padding-bottom:7px;
+outline:none;
+text-align:center;
+width:100%
+}
+.dialog input[type=email]::-webkit-input-placeholder,.dialog input[type=text]::-webkit-input-placeholder{
+color:#868686
+}
+.dialog input[type=email]::-moz-placeholder,.dialog input[type=text]::-moz-placeholder{
+color:#868686
+}
+.dialog input[type=email]:-ms-input-placeholder,.dialog input[type=text]:-ms-input-placeholder{
+color:#868686
+}
+.dialog input[type=email]::-ms-input-placeholder,.dialog input[type=text]::-ms-input-placeholder{
+color:#868686
+}
+.dialog input[type=email]::placeholder,.dialog input[type=text]::placeholder{
+color:#868686
+}
+.dialog input[type=email]:focus,.dialog input[type=text]:focus{
+border-bottom:2px solid #397ff4;
+padding-bottom:6px
+}
+.dialog input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #868686
+}
+.dialog input.no-cursor:focus{
+outline:none
+}
+.dialog input[type=submit]{
+font-family:Roboto, sans-serif
+}
+.dialog .goog-buttonset-default{
+color:#397ff4
+}
+.subscribe-popup{
+max-width:364px
+}
+.subscribe-popup h3{
+color:#676767;
+font-size:1.8em;
+margin-top:0
+}
+.subscribe-popup .FollowByEmail h3{
+display:none
+}
+.subscribe-popup .FollowByEmail .follow-by-email-submit{
+color:#397ff4;
+display:inline-block;
+margin:24px auto 0;
+width:auto;
+white-space:normal
+}
+.subscribe-popup .FollowByEmail .follow-by-email-submit:disabled{
+cursor:default;
+opacity:.3
+}
+@media (max-width:800px){
+.blog-name div.widget.Subscribe{
+margin-bottom:16px
+}
+body.item-view .blog-name div.widget.Subscribe{
+margin:8px auto 16px;
+width:100%
+}
+}
+.tabs{
+list-style:none
+}
+.tabs li,.tabs li a{
+display:inline-block
+}
+.tabs li a{
+cursor:pointer;
+font-weight:700;
+text-transform:uppercase;
+padding:12px 8px
+}
+.tabs .selected{
+border-bottom:4px solid #676767
+}
+.tabs .selected a{
+color:#676767
+}
+body#layout .bg-photo,body#layout .bg-photo-overlay{
+display:none
+}
+body#layout .page_body{
+padding:0;
+position:relative;
+top:0
+}
+body#layout .page{
+display:inline-block;
+left:inherit;
+position:relative;
+vertical-align:top;
+width:540px
+}
+body#layout .centered{
+max-width:954px
+}
+body#layout .navigation{
+display:none
+}
+body#layout .sidebar-container{
+display:inline-block;
+width:40%
+}
+body#layout .hamburger-menu,body#layout .search{
+display:none
+}
+.centered-top-container .svg-icon-24,body.collapsed-header .centered-top-placeholder .svg-icon-24{
+fill:#676767
+}
+.sidebar-container .svg-icon-24{
+fill:#828282
+}
+.centered-bottom .svg-icon-24,body.collapsed-header .centered-top-container .svg-icon-24{
+fill:#828282
+}
+.centered-bottom .share-buttons .svg-icon-24,.share-buttons .svg-icon-24{
+fill:#424242
+}
+body{
+background-color:#f8f8f8;
+color:#868686;
+font:15px Roboto, sans-serif;
+margin:0;
+min-height:100vh
+}
+img{
+max-width:100%
+}
+h3{
+color:#868686;
+font-size:16px
+}
+a{
+text-decoration:none;
+color:#397ff4
+}
+a:visited{
+color:#2196f3
+}
+a:hover{
+color:#2196f3
+}
+blockquote{
+color:#676767;
+font:italic 300 15px Roboto, sans-serif;
+font-size:x-large;
+text-align:center
+}
+.pill-button{
+font-size:12px
+}
+.bg-photo-container{
+height:480px;
+overflow:hidden;
+position:absolute;
+width:100%;
+z-index:1
+}
+.bg-photo{
+background:#e6e9ee url(https://themes.googleusercontent.com/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD) no-repeat fixed top center /* Credit: Storman (http://www.istockphoto.com/portfolio/Storman?platform=blogger) */;
+background-attachment:scroll;
+background-size:cover;
+-webkit-filter:blur(0px);
+filter:blur(0px);
+height:calc(100% + 2 * 0px);
+left:0px;
+position:absolute;
+top:0px;
+width:calc(100% + 2 * 0px)
+}
+.bg-photo-overlay{
+background:rgba(92,92,92,0);
+background-size:cover;
+height:480px;
+position:absolute;
+width:100%;
+z-index:2
+}
+.hamburger-menu{
+float:left;
+margin-top:0
+}
+.sticky .hamburger-menu{
+float:none;
+position:absolute
+}
+.no-sidebar-widget .hamburger-menu{
+display:none
+}
+.footer .widget .title{
+margin:0;
+line-height:24px
+}
+.search{
+border-bottom:1px solid rgba(103, 103, 103, 0);
+float:right;
+position:relative;
+-webkit-transition-property:width;
+transition-property:width;
+-webkit-transition-duration:.5s;
+transition-duration:.5s;
+-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);
+transition-timing-function:cubic-bezier(.4,0,.2,1);
+z-index:101
+}
+.search .dim-overlay{
+background-color:transparent
+}
+.search form{
+height:36px;
+-webkit-transition:border-color .2s cubic-bezier(.4,0,.2,1) .5s;
+transition:border-color .2s cubic-bezier(.4,0,.2,1) .5s
+}
+.search.focused{
+width:calc(100% - 48px)
+}
+.search.focused form{
+display:-webkit-box;
+display:flex;
+-webkit-box-flex:1;
+flex:1 0 1px;
+border-color:#676767;
+margin-left:-24px;
+padding-left:36px;
+position:relative;
+width:auto
+}
+.item-view .search,.sticky .search{
+right:0;
+float:none;
+margin-left:0;
+position:absolute
+}
+.item-view .search.focused,.sticky .search.focused{
+width:calc(100% - 50px)
+}
+.item-view .search.focused form,.sticky .search.focused form{
+border-bottom-color:#757575
+}
+.centered-top-placeholder.cloned .search form{
+z-index:30
+}
+.search_button{
+-webkit-box-flex:0;
+flex:0 0 24px;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+flex-direction:column
+}
+.search_button svg{
+margin-top:0
+}
+.search-input{
+height:48px
+}
+.search-input input{
+display:block;
+color:#424242;
+font:16px Roboto, sans-serif;
+height:48px;
+line-height:48px;
+padding:0;
+width:100%
+}
+.search-input input::-webkit-input-placeholder{
+color:#424242;
+opacity:.3
+}
+.search-input input::-moz-placeholder{
+color:#424242;
+opacity:.3
+}
+.search-input input:-ms-input-placeholder{
+color:#424242;
+opacity:.3
+}
+.search-input input::-ms-input-placeholder{
+color:#424242;
+opacity:.3
+}
+.search-input input::placeholder{
+color:#424242;
+opacity:.3
+}
+.search-action{
+background:transparent;
+border:0;
+color:#676767;
+cursor:pointer;
+display:none;
+height:48px;
+margin-top:0
+}
+.sticky .search-action{
+color:#757575
+}
+.search.focused .search-action{
+display:block
+}
+.search.focused .search-action:disabled{
+opacity:.3
+}
+.page_body{
+position:relative;
+z-index:20
+}
+.page_body .widget{
+margin-bottom:16px
+}
+.page_body .centered{
+box-sizing:border-box;
+display:-webkit-box;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+flex-direction:column;
+margin:0 auto;
+max-width:922px;
+min-height:100vh;
+padding:24px 0
+}
+.page_body .centered>*{
+-webkit-box-flex:0;
+flex:0 0 auto
+}
+.page_body .centered>.footer{
+margin-top:auto;
+text-align:center
+}
+.blog-name{
+margin:32px 0 16px
+}
+.item-view .blog-name,.sticky .blog-name{
+box-sizing:border-box;
+margin-left:36px;
+min-height:48px;
+opacity:1;
+padding-top:12px
+}
+.blog-name .subscribe-section-container{
+margin-bottom:32px;
+text-align:center;
+-webkit-transition-property:opacity;
+transition-property:opacity;
+-webkit-transition-duration:.5s;
+transition-duration:.5s
+}
+.item-view .blog-name .subscribe-section-container,.sticky .blog-name .subscribe-section-container{
+margin:0 0 8px
+}
+.blog-name .subscribe-empty-placeholder{
+margin-bottom:48px
+}
+.blog-name .PageList{
+margin-top:16px;
+padding-top:8px;
+text-align:center
+}
+.blog-name .PageList .overflowable-contents{
+width:100%
+}
+.blog-name .PageList h3.title{
+color:#676767;
+margin:8px auto;
+text-align:center;
+width:100%
+}
+.centered-top-container .blog-name{
+-webkit-transition-property:opacity;
+transition-property:opacity;
+-webkit-transition-duration:.5s;
+transition-duration:.5s
+}
+.item-view .return_link{
+margin-bottom:12px;
+margin-top:12px;
+position:absolute
+}
+.item-view .blog-name{
+display:-webkit-box;
+display:flex;
+flex-wrap:wrap;
+margin:0 48px 27px
+}
+.item-view .subscribe-section-container{
+-webkit-box-flex:0;
+flex:0 0 auto
+}
+.item-view #header,.item-view .Header{
+margin-bottom:5px;
+margin-right:15px
+}
+.item-view .sticky .Header{
+margin-bottom:0
+}
+.item-view .Header p{
+margin:10px 0 0;
+text-align:left
+}
+.item-view .post-share-buttons-bottom{
+margin-right:16px
+}
+.sticky{
+background:#ffffff;
+box-shadow:0 0 20px 0 rgba(0,0,0,.7);
+box-sizing:border-box;
+margin-left:0
+}
+.sticky #header{
+margin-bottom:8px;
+margin-right:8px
+}
+.sticky .centered-top{
+margin:4px auto;
+max-width:890px;
+min-height:48px
+}
+.sticky .blog-name{
+display:-webkit-box;
+display:flex;
+margin:0 48px
+}
+.sticky .blog-name #header{
+-webkit-box-flex:0;
+flex:0 1 auto;
+-webkit-box-ordinal-group:2;
+order:1;
+overflow:hidden
+}
+.sticky .blog-name .subscribe-section-container{
+-webkit-box-flex:0;
+flex:0 0 auto;
+-webkit-box-ordinal-group:3;
+order:2
+}
+.sticky .Header h1{
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+margin-right:-10px;
+margin-bottom:-10px;
+padding-right:10px;
+padding-bottom:10px
+}
+.sticky .Header p,.sticky .PageList{
+display:none
+}
+.search-focused .hamburger-menu,.search-focused>*{
+visibility:visible
+}
+.item-view .search-focused .blog-name,.sticky .search-focused .blog-name{
+opacity:0
+}
+.centered-bottom,.centered-top-container,.centered-top-placeholder{
+padding:0 16px
+}
+.centered-top{
+position:relative
+}
+.item-view .centered-top.search-focused .subscribe-section-container,.sticky .centered-top.search-focused .subscribe-section-container{
+opacity:0
+}
+.page_body.has-vertical-ads .centered .centered-bottom{
+display:inline-block;
+width:calc(100% - 176px)
+}
+.Header h1{
+font:bold 45px Roboto, sans-serif;
+line-height:normal;
+margin:0 0 13px;
+text-align:center;
+width:100%
+}
+.Header h1,.Header h1 a,.Header h1 a:hover,.Header h1 a:visited{
+color:#676767
+}
+.item-view .Header h1,.sticky .Header h1{
+font-size:24px;
+line-height:24px;
+margin:0;
+text-align:left
+}
+.sticky .Header h1,.sticky .Header h1 a,.sticky .Header h1 a:hover,.sticky .Header h1 a:visited{
+color:#757575
+}
+.Header p{
+color:#676767;
+margin:0 0 13px;
+opacity:.8;
+text-align:center
+}
+.widget .title{
+line-height:28px
+}
+.BlogArchive li{
+font-size:16px
+}
+.BlogArchive .post-count{
+color:#757575
+}
+#page_body .FeaturedPost,.Blog .blog-posts .post-outer-container{
+background:#ffffff;
+min-height:40px;
+padding:30px 40px;
+width:auto;
+box-shadow:0 1px 4px 0 rgba(96,100,107,0.298)
+}
+.Blog .blog-posts .post-outer-container:last-child{
+margin-bottom:0
+}
+.Blog .blog-posts .post-outer-container .post-outer{
+border:0;
+position:relative;
+padding-bottom:.25em
+}
+.post-outer-container{
+margin-bottom:16px
+}
+.post:first-child{
+margin-top:0
+}
+.post .thumb{
+float:left;
+height:20%;
+width:20%
+}
+.post-share-buttons-bottom,.post-share-buttons-top{
+float:right
+}
+.post-share-buttons-bottom{
+margin-right:24px
+}
+.post-footer,.post-header{
+clear:left;
+color:rgba(92,92,92,0.537);
+margin:0;
+width:inherit
+}
+.blog-pager{
+text-align:center
+}
+.blog-pager a{
+color:#2196f3
+}
+.blog-pager a:visited{
+color:#2196f3
+}
+.blog-pager a:hover{
+color:#2196f3
+}
+.post-title{
+font:bold 22px Roboto, sans-serif;
+float:left;
+margin:0 0 8px;
+max-width:calc(100% - 48px)
+}
+.post-title a{
+font:bold 30px Roboto, sans-serif
+}
+.post-title,.post-title a,.post-title a:hover,.post-title a:visited{
+color:#676767
+}
+.post-body{
+color:#757575;
+font:15px Roboto, sans-serif;
+line-height:1.6em;
+margin:1.5em 0 2em;
+display:block
+}
+.post-body img{
+height:inherit
+}
+.post-body .snippet-thumbnail{
+float:left;
+margin:0;
+margin-right:2em;
+max-height:128px;
+max-width:128px
+}
+.post-body .snippet-thumbnail img{
+max-width:100%
+}
+.main .FeaturedPost .widget-content{
+border:0;
+position:relative;
+padding-bottom:.25em
+}
+.FeaturedPost img{
+margin-top:2em
+}
+.FeaturedPost .snippet-container{
+margin:2em 0
+}
+.FeaturedPost .snippet-container p{
+margin:0
+}
+.FeaturedPost .snippet-thumbnail{
+float:none;
+height:auto;
+margin-bottom:2em;
+margin-right:0;
+overflow:hidden;
+max-height:calc(600px + 2em);
+max-width:100%;
+text-align:center;
+width:100%
+}
+.FeaturedPost .snippet-thumbnail img{
+max-width:100%;
+width:100%
+}
+.byline{
+color:rgba(92,92,92,0.537);
+display:inline-block;
+line-height:24px;
+margin-top:8px;
+vertical-align:top
+}
+.byline.post-author:first-child{
+margin-right:0
+}
+.byline.reactions .reactions-label{
+line-height:22px;
+vertical-align:top
+}
+.byline.post-share-buttons{
+position:relative;
+display:inline-block;
+margin-top:0;
+width:100%
+}
+.byline.post-share-buttons .sharing{
+float:right
+}
+.flat-button.ripple:hover{
+background-color:rgba(57,127,244,.12)
+}
+.flat-button.ripple .splash{
+background-color:rgba(57,127,244,.4)
+}
+a.timestamp-link,a:active.timestamp-link,a:visited.timestamp-link{
+color:inherit;
+font:inherit;
+text-decoration:inherit
+}
+.post-share-buttons{
+margin-left:0
+}
+.post-share-buttons.invisible{
+display:none
+}
+.clear-sharing{
+min-height:24px
+}
+.comment-link{
+color:#397ff4;
+position:relative
+}
+.comment-link .num_comments{
+margin-left:8px;
+vertical-align:top
+}
+#comment-holder .continue{
+display:none
+}
+#comment-editor{
+margin-bottom:20px;
+margin-top:20px
+}
+#comments .comment-form h4,#comments h3.title{
+position:absolute;
+clip:rect(1px,1px,1px,1px);
+padding:0;
+border:0;
+height:1px;
+width:1px;
+overflow:hidden
+}
+.post-filter-message{
+background-color:rgba(0,0,0,.7);
+color:#fff;
+display:table;
+margin-bottom:16px;
+width:100%
+}
+.post-filter-message div{
+display:table-cell;
+padding:15px 28px
+}
+.post-filter-message div:last-child{
+padding-left:0;
+text-align:right
+}
+.post-filter-message a{
+white-space:nowrap
+}
+.post-filter-message .search-label,.post-filter-message .search-query{
+font-weight:700;
+color:#397ff4
+}
+#blog-pager{
+margin:2em 0
+}
+#blog-pager a{
+color:#2196f3;
+font-size:14px
+}
+.subscribe-button{
+border-color:#676767;
+color:#676767
+}
+.sticky .subscribe-button{
+border-color:#757575;
+color:#757575
+}
+.tabs{
+margin:0 auto;
+padding:0
+}
+.tabs li{
+margin:0 8px;
+vertical-align:top
+}
+.tabs .overflow-button a,.tabs li a{
+color:#868686;
+font:700 normal 15px Roboto, sans-serif;
+line-height:18px
+}
+.tabs .overflow-button a{
+padding:12px 8px
+}
+.overflow-popup .tabs li{
+text-align:left
+}
+.overflow-popup li a{
+color:#757575;
+display:block;
+padding:8px 20px
+}
+.overflow-popup li.selected a{
+color:#424242
+}
+.ReportAbuse.widget{
+margin-bottom:0
+}
+.ReportAbuse a.report_abuse{
+display:inline-block;
+margin-bottom:8px;
+font:15px Roboto, sans-serif;
+font-weight:400;
+line-height:24px
+}
+.ReportAbuse a.report_abuse,.ReportAbuse a.report_abuse:hover{
+color:#888
+}
+.byline.post-labels a,.Label li,.Label span.label-size{
+background-color:#fbfbfb;
+border:1px solid #fbfbfb;
+border-radius:15px;
+display:inline-block;
+margin:4px 4px 4px 0;
+padding:3px 8px
+}
+.byline.post-labels a,.Label a{
+color:#2196f3
+}
+.Label ul{
+list-style:none;
+padding:0
+}
+.PopularPosts{
+background-color:#f4f4f4;
+padding:30px 40px
+}
+.PopularPosts .item-content{
+color:#757575;
+margin-top:24px
+}
+.PopularPosts a,.PopularPosts a:hover,.PopularPosts a:visited{
+color:#2196f3
+}
+.PopularPosts .post-title,.PopularPosts .post-title a,.PopularPosts .post-title a:hover,.PopularPosts .post-title a:visited{
+color:#424242;
+font-size:18px;
+font-weight:700;
+line-height:24px
+}
+.PopularPosts,.PopularPosts h3.title a{
+color:#757575;
+font:15px Roboto, sans-serif
+}
+.main .PopularPosts{
+padding:16px 40px
+}
+.PopularPosts h3.title{
+font-size:14px;
+margin:0
+}
+.PopularPosts h3.post-title{
+margin-bottom:0
+}
+.PopularPosts .byline{
+color:#000000
+}
+.PopularPosts .jump-link{
+float:right;
+margin-top:16px
+}
+.PopularPosts .post-header .byline{
+font-size:.9em;
+font-style:italic;
+margin-top:6px
+}
+.PopularPosts ul{
+list-style:none;
+padding:0;
+margin:0
+}
+.PopularPosts .post{
+padding:20px 0
+}
+.PopularPosts .post+.post{
+border-top:1px dashed #d2d2d2
+}
+.PopularPosts .item-thumbnail{
+float:left;
+margin-right:32px
+}
+.PopularPosts .item-thumbnail img{
+height:88px;
+padding:0;
+width:88px
+}
+.inline-ad{
+margin-bottom:16px
+}
+.desktop-ad .inline-ad{
+display:block
+}
+.adsbygoogle{
+overflow:hidden
+}
+.vertical-ad-container{
+float:right;
+margin-right:16px;
+width:128px
+}
+.vertical-ad-container .AdSense+.AdSense{
+margin-top:16px
+}
+.inline-ad-placeholder,.vertical-ad-placeholder{
+background:#ffffff;
+border:1px solid #000;
+opacity:.9;
+vertical-align:middle;
+text-align:center
+}
+.inline-ad-placeholder span,.vertical-ad-placeholder span{
+margin-top:290px;
+display:block;
+text-transform:uppercase;
+font-weight:700;
+color:#676767
+}
+.vertical-ad-placeholder{
+height:600px
+}
+.vertical-ad-placeholder span{
+margin-top:290px;
+padding:0 40px
+}
+.inline-ad-placeholder{
+height:90px
+}
+.inline-ad-placeholder span{
+margin-top:36px
+}
+.Attribution{
+display:inline-block;
+color:#757575
+}
+.Attribution a,.Attribution a:hover,.Attribution a:visited{
+color:#2196f3
+}
+.Attribution svg{
+display:none
+}
+.sidebar-container{
+box-shadow:1px 1px 3px rgba(0,0,0,.1)
+}
+.sidebar-container,.sidebar-container .sidebar_bottom{
+background-color:#ffffff
+}
+.sidebar-container .navigation,.sidebar-container .sidebar_top_wrapper{
+background-color:#fbfbfb
+}
+.sidebar-container .sidebar_top{
+overflow:auto
+}
+.sidebar-container .sidebar_bottom{
+width:100%;
+padding-top:16px
+}
+.sidebar-container .widget:first-child{
+padding-top:0
+}
+.no-sidebar-widget .sidebar-container,.preview .sidebar-container{
+display:none
+}
+.sidebar_top .widget.Profile{
+padding-bottom:16px
+}
+.widget.Profile{
+margin:0;
+width:100%
+}
+.widget.Profile h2{
+display:none
+}
+.widget.Profile h3.title{
+color:rgba(92,92,92,0.518);
+margin:16px 32px
+}
+.widget.Profile .individual{
+text-align:center
+}
+.widget.Profile .individual .profile-link{
+padding:1em
+}
+.widget.Profile .individual .default-avatar-wrapper .avatar-icon{
+margin:auto
+}
+.widget.Profile .team{
+margin-bottom:32px;
+margin-left:32px;
+margin-right:32px
+}
+.widget.Profile ul{
+list-style:none;
+padding:0
+}
+.widget.Profile li{
+margin:10px 0
+}
+.widget.Profile .profile-img{
+border-radius:50%;
+float:none
+}
+.widget.Profile .profile-link{
+color:#424242;
+font-size:.9em;
+margin-bottom:1em;
+opacity:.87;
+overflow:hidden
+}
+.widget.Profile .profile-link.visit-profile{
+border-style:solid;
+border-width:1px;
+border-radius:12px;
+cursor:pointer;
+font-size:12px;
+font-weight:400;
+padding:5px 20px;
+display:inline-block;
+line-height:normal
+}
+.widget.Profile dd{
+color:rgba(92,92,92,0.537);
+margin:0 16px
+}
+.widget.Profile location{
+margin-bottom:1em
+}
+.widget.Profile .profile-textblock{
+font-size:14px;
+line-height:24px;
+position:relative
+}
+body.sidebar-visible .bg-photo-container,body.sidebar-visible .page_body{
+overflow-y:scroll
+}
+@media screen and (min-width:1440px){
+.sidebar-container{
+min-height:100%;
+overflow:visible;
+z-index:32
+}
+.sidebar-container.show-sidebar-top{
+margin-top:480px;
+min-height:calc(100% - 480px)
+}
+.sidebar-container .sidebar_top_wrapper{
+background-color:#ffffff;
+height:480px;
+margin-top:-480px
+}
+.sidebar-container .sidebar_top{
+height:480px;
+max-height:480px
+}
+.sidebar-container .sidebar_bottom{
+max-width:284px;
+width:284px
+}
+body.collapsed-header .sidebar-container{
+z-index:15
+}
+.sidebar-container .sidebar_top:empty{
+display:none
+}
+.sidebar-container .sidebar_top>:only-child{
+-webkit-box-flex:0;
+flex:0 0 auto;
+align-self:center;
+width:100%
+}
+.sidebar_top_wrapper.no-items{
+display:none
+}
+}
+.post-snippet.snippet-container{
+max-height:120px
+}
+.post-snippet .snippet-item{
+line-height:24px
+}
+.post-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+background:linear-gradient(to left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+color:#868686;
+height:24px
+}
+.popular-posts-snippet.snippet-container{
+max-height:72px
+}
+.popular-posts-snippet .snippet-item{
+line-height:24px
+}
+.PopularPosts .popular-posts-snippet .snippet-fade{
+color:#868686;
+height:24px
+}
+.main .popular-posts-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#f4f4f4 0,#f4f4f4 20%,rgba(244, 244, 244, 0) 100%);
+background:linear-gradient(to left,#f4f4f4 0,#f4f4f4 20%,rgba(244, 244, 244, 0) 100%)
+}
+.sidebar_bottom .popular-posts-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+background:linear-gradient(to left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%)
+}
+.profile-snippet.snippet-container{
+max-height:192px
+}
+.has-location .profile-snippet.snippet-container{
+max-height:144px
+}
+.profile-snippet .snippet-item{
+line-height:24px
+}
+.profile-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#fbfbfb 0,#fbfbfb 20%,rgba(251, 251, 251, 0) 100%);
+background:linear-gradient(to left,#fbfbfb 0,#fbfbfb 20%,rgba(251, 251, 251, 0) 100%);
+color:rgba(92,92,92,0.537);
+height:24px
+}
+@media screen and (min-width:1440px){
+.profile-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+background:linear-gradient(to left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%)
+}
+}
+@media screen and (max-width:800px){
+.blog-name{
+margin-top:0
+}
+body.item-view .blog-name{
+margin:0 48px
+}
+.blog-name .subscribe-empty-placeholder{
+margin-bottom:0
+}
+.centered-bottom{
+padding:8px
+}
+body.item-view .centered-bottom{
+padding:0
+}
+body.item-view #header,body.item-view .widget.Header{
+margin-right:0
+}
+body.collapsed-header .centered-top-container .blog-name{
+display:block
+}
+body.collapsed-header .centered-top-container .widget.Header h1{
+text-align:center
+}
+.widget.Header header{
+padding:0
+}
+.widget.Header h1{
+font-size:$(blog.title.font.size * 24/45);
+line-height:$(blog.title.font.size * 24/45);
+margin-bottom:13px
+}
+body.item-view .widget.Header h1,body.item-view .widget.Header p{
+text-align:center
+}
+.blog-name .widget.PageList{
+padding:0
+}
+body.item-view .centered-top{
+margin-bottom:5px
+}
+.search-action,.search-input{
+margin-bottom:-8px
+}
+.search form{
+margin-bottom:8px
+}
+body.item-view .subscribe-section-container{
+margin:5px 0 0;
+width:100%
+}
+#page_body.section div.widget.FeaturedPost,.widget.Blog .blog-posts .post-outer-container,.widget.PopularPosts{
+padding:16px
+}
+.widget.Blog .blog-posts .post-outer-container .post-outer{
+padding:0
+}
+.post:first-child{
+margin:0
+}
+.post-body .snippet-thumbnail{
+margin:0 3vw 3vw 0
+}
+.post-body .snippet-thumbnail img{
+height:20vw;
+width:20vw;
+max-height:128px;
+max-width:128px
+}
+.widget.PopularPosts div.item-thumbnail{
+margin:0 3vw 3vw 0
+}
+.widget.PopularPosts div.item-thumbnail img{
+height:20vw;
+width:20vw;
+max-height:88px;
+max-width:88px
+}
+.post-title{
+line-height:1
+}
+.post-title,.post-title a{
+font-size:20px
+}
+#page_body.section div.widget.FeaturedPost h3 a{
+font-size:22px
+}
+.mobile-ad .inline-ad{
+display:block
+}
+.page_body.has-vertical-ads .vertical-ad-container,.page_body.has-vertical-ads .vertical-ad-container ins{
+display:none
+}
+.page_body.has-vertical-ads .centered .centered-bottom,.page_body.has-vertical-ads .centered .centered-top{
+display:block;
+width:auto
+}
+.post-filter-message div{
+padding:8px 16px
+}
+}
+@media screen and (min-width:1440px){
+body{
+position:relative
+}
+body.item-view .blog-name{
+margin-left:48px
+}
+.no-sidebar-widget .page_body,.preview .page_body{
+margin-left:0
+}
+.page_body{
+margin-left:284px
+}
+.search{
+margin-left:0
+}
+.search.focused{
+width:100%
+}
+.sticky{
+padding-left:284px
+}
+.hamburger-menu{
+display:none
+}
+body.collapsed-header .page_body .centered-top-container{
+padding-left:284px;
+padding-right:0;
+width:100%
+}
+body.collapsed-header .centered-top-container .search.focused{
+width:100%
+}
+body.collapsed-header .centered-top-container .blog-name{
+margin-left:0
+}
+body.collapsed-header.item-view .centered-top-container .search.focused{
+width:calc(100% - 50px)
+}
+body.collapsed-header.item-view .centered-top-container .blog-name{
+margin-left:40px
+}
+}
+/* =========================================
+单列极简美化&#65306;保留原布局&#65292;提升高级感
+========================================= */
+/* 1. 卡片化美化&#65306;增加大圆角&#12289;呼吸感留白和轻柔阴影 */
+#page_body .FeaturedPost,
+.Blog .blog-posts .post-outer-container {
+background: #ffffff !important;
+border-radius: 16px !important; /* 更柔和的现代感圆角 */
+padding: 32px !important; /* 增加内部留白&#65292;不那么局促 */
+margin-bottom: 32px !important; /* 文章之间的间距 */
+box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important; /* 非常轻柔的常驻阴影 */
+transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+border: none !important; /* 强制去除原本可能存在的生硬边框 */
+}
+/* 2. 交互动效&#65306;鼠标悬停时卡片微微浮起 */
+#page_body .FeaturedPost:hover,
+.Blog .blog-posts .post-outer-container:hover {
+transform: translateY(-4px); /* 向上轻微浮动 */
+box-shadow: 0 12px 30px rgba(0,0,0,0.08) !important; /* 阴影加深加宽&#65292;立体感拉满 */
+}
+/* 3. 图片美化&#65306;加圆角&#65292;悬停时微缩放&#65288;非常有极客感&#65289; */
+.post-body .snippet-thumbnail {
+border-radius: 12px !important;
+overflow: hidden !important; /* 确保图片不出界 */
+box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+.post-body .snippet-thumbnail img {
+border-radius: 12px !important;
+transition: transform 0.5s ease !important;
+}
+/* 鼠标悬停文章时&#65292;缩略图缓慢放大一点点 */
+.Blog .blog-posts .post-outer-container:hover .snippet-thumbnail img {
+transform: scale(1.03) !important;
+}
+/* 4. 文字排版优化&#65306;更易读 */
+.post-title {
+font-size: 24px !important; /* 标题稍微放大&#65292;更有分量 */
+font-weight: 700 !important;
+margin-bottom: 16px !important;
+}
+.post-body {
+line-height: 1.8 !important; /* 增加行距&#65292;阅读更舒适 */
+color: #4a4a4a !important; /* 字体颜色改为柔和的深灰色&#65292;不刺眼 */
+}
+/* 5. 美化底部的 "继续阅读/More" 按钮区域 */
+.jump-link.flat-button {
+background-color: #f4f6f8 !important;
+border-radius: 8px !important;
+padding: 10px 20px !important;
+transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+.jump-link.flat-button:hover {
+background-color: #e2e6ea !important;
+}
+/* =========================================
+进阶美化全家桶&#65306;代码块&#12289;引用块&#12289;滚动条与深色模式
+========================================= */
+/* 1. 极简自定义滚动条 (Webkit) */
+::-webkit-scrollbar {
+width: 8px !important;
+height: 8px !important;
+}
+::-webkit-scrollbar-track {
+background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+background: #cbd5e1 !important;
+border-radius: 10px !important;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8 !important;
+}
+/* 2. 排版微调与引用块 (Blockquote) 美化 */
+.post-body blockquote {
+background: #f8fafc !important;
+border-left: 4px solid #397ff4 !important; /* 左侧强调色 */
+margin: 1.5em 0 !important;
+padding: 16px 20px !important;
+border-radius: 0 12px 12px 0 !important;
+color: #475569 !important;
+font-style: normal !important;
+box-shadow: 0 2px 6px rgba(0,0,0,0.02) !important;
+font-size: 0.95em !important;
+}
+/* 3. 行内代码与基础代码框美化 (极客暗黑风) */
+.post-body code {
+background: #f1f5f9 !important;
+color: #e11d48 !important; /* 醒目的深红色 */
+padding: 3px 6px !important;
+border-radius: 6px !important;
+font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+font-size: 0.9em !important;
+}
+.post-body pre {
+background: #1e293b !important; /* 极客深蓝灰色背景 */
+color: #f8fafc !important;
+padding: 20px !important;
+border-radius: 12px !important;
+overflow-x: auto !important;
+margin: 1.5em 0 !important;
+box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1) !important;
+}
+.post-body pre code {
+background: transparent !important;
+color: inherit !important;
+padding: 0 !important;
+}
+/* 4. 原生深色模式 (Dark Mode) - 自动跟随系统切换 */
+@media (prefers-color-scheme: dark) {
+body, .bg-photo-overlay {
+background-color: #0f172a !important; /* 深渊蓝灰背景 */
+}
+/* 卡片变暗 */
+#page_body .FeaturedPost,
+.Blog .blog-posts .post-outer-container,
+.sidebar-container .widget {
+background: #1e293b !important;
+box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+}
+/* 文字变亮 */
+.post-title, .post-title a, h3.title {
+color: #f8fafc !important;
+}
+.post-body {
+color: #cbd5e1 !important;
+}
+/* 引用块适配深色 */
+.post-body blockquote {
+background: #0f172a !important;
+color: #94a3b8 !important;
+border-left-color: #3b82f6 !important;
+}
+/* 行内代码适配深色 */
+.post-body code {
+background: #334155 !important;
+color: #fca5a5 !important;
+}
+/* 滚动条适配深色 */
+::-webkit-scrollbar-thumb {
+background: #475569 !important;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #64748b !important;
+}
+/* 按钮适配深色 */
+.jump-link.flat-button {
+background-color: #334155 !important;
+color: #e2e8f0 !important;
+}
+.jump-link.flat-button:hover {
+background-color: #475569 !important;
+}
+}
+/* 强制抹除 Flex 布局造成的冲突&#65292;恢复 Blogger 默认的文本换行机制 */
+.post-body {
+display: block !important;
+}
+/* =========================================
+美化代码块的 "一键复制" 按钮
+========================================= */
+div.code-toolbar > .toolbar {
+opacity: 0; /* 默认隐藏&#65292;鼠标移入时显示&#65292;更清爽 */
+transition: opacity 0.3s ease !important;
+}
+div.code-toolbar:hover > .toolbar {
+opacity: 1;
+}
+div.code-toolbar > .toolbar a,
+div.code-toolbar > .toolbar button,
+div.code-toolbar > .toolbar span {
+background: #334155 !important; /* 极客深灰背景 */
+color: #cbd5e1 !important; /* 浅灰文字 */
+border-radius: 6px !important; /* 圆角 */
+padding: 6px 12px !important;
+font-size: 13px !important;
+font-family: inherit !important;
+transition: all 0.3s ease !important;
+border: none !important;
+box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important; /* 轻微悬浮阴影 */
+}
+div.code-toolbar > .toolbar a:hover,
+div.code-toolbar > .toolbar button:hover,
+div.code-toolbar > .toolbar span:hover {
+background: #397ff4 !important; /* 鼠标悬停变成极客亮蓝色 */
+color: #ffffff !important;
+cursor: pointer !important;
+transform: translateY(-2px); /* 悬停时按钮微微上浮 */
+}
+/* 强制显示复制按钮并置于最顶层 */
+.code-toolbar .toolbar {
+display: block !important;
+position: absolute !important;
+top: 10px !important;
+right: 15px !important;
+z-index: 9999 !important;
+opacity: 1 !important;
+}
+.code-toolbar .toolbar button {
+cursor: pointer !important;
+background: #475569 !important; /* 灰色背景 */
+color: white !important;
+border: none !important;
+padding: 5px 10px !important;
+border-radius: 4px !important;
+}
+
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body#layout .hidden,
+body#layout .invisible {
+display: inherit;
+}
+body#layout .navigation {
+display: none;
+}
+body#layout .page,
+body#layout .sidebar_top,
+body#layout .sidebar_bottom {
+display: inline-block;
+left: inherit;
+position: relative;
+vertical-align: top;
+}
+body#layout .page {
+float: right;
+margin-left: 20px;
+width: 55%;
+}
+body#layout .sidebar-container {
+float: right;
+width: 40%;
+}
+body#layout .hamburger-menu {
+display: none;
+}
+--></style>
+<style>
+    .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD);}
+    
+@media (max-width: 480px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD&options=w480);}}
+@media (max-width: 640px) and (min-width: 481px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD&options=w640);}}
+@media (max-width: 800px) and (min-width: 641px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD&options=w800);}}
+@media (max-width: 1200px) and (min-width: 801px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD&options=w1200);}}
+/* Last tag covers anything over one higher than the previous max-size cap. */
+@media (min-width: 1201px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=1-QeziT_xhEvxfBl8wPx5qvDh7FrTqJvLJR2vQYW-ZkaGhxc2p1Zzl4P1_LVa2rRTUapD&options=w1600);}}
+  </style>
+<script async="async" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/clipboard.min.js.下载"></script>
+<link href="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/authorization.css" media="all" onload="if(media!=&#39;all&#39;)media=&#39;all&#39;" rel="stylesheet"><noscript><link href='https://draft.blogger.com/dyn-css/authorization.css?targetBlogID=1851036973524076163&amp;zx=59d17489-29c7-4de2-8b6a-8dfe1194ef2a' rel='stylesheet'/></noscript>
+<meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109">
+<meta name="google-adsense-platform-domain" content="blogspot.com">
+
+<script async="" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/f.txt" crossorigin="anonymous"></script>
+
+<!-- data-ad-client=ca-pub-2160969409923714 -->
+
+<script type="text/javascript" charset="UTF-8" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/loader.js.下载"></script><link id="load-css-0" rel="stylesheet" type="text/css" href="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/tooltip.css"><link id="load-css-1" rel="stylesheet" type="text/css" href="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/util.css"><script type="text/javascript" charset="UTF-8" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/jsapi_compiled_default_module.js.下载"></script><script type="text/javascript" charset="UTF-8" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/jsapi_compiled_graphics_module.js.下载"></script><script type="text/javascript" charset="UTF-8" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/jsapi_compiled_ui_module.js.下载"></script><script type="text/javascript" charset="UTF-8" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/jsapi_compiled_corechart_module.js.下载"></script></head>
+<body class="item-view" data-js-state="loaded">
+<a class="skip-navigation" href="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html#main" tabindex="0">
+跳至主要内容
+</a>
+<div class="page">
+<div class="bg-photo-overlay"></div>
+<div class="bg-photo-container">
+<div class="bg-photo"></div>
+</div>
+<div class="page_body">
+<div class="centered">
+<div class="centered-top-placeholder"></div>
+<header class="centered-top-container" role="banner">
+<div class="centered-top">
+<a class="return_link" href="https://eianunbits.blogspot.com/">
+<button class="svg-icon-24-button back-button rtl-reversible-icon flat-icon-button ripple">
+<svg class="svg-icon-24">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</button>
+</a>
+<div class="clearboth"></div>
+<div class="blog-name container">
+<div class="container section" id="header" name="标题"><div class="widget Header" data-version="2" id="Header1">
+<div class="header-widget">
+<div>
+<h1>
+<a href="https://eianunbits.blogspot.com/">
+Eianun科技碎片
+</a>
+</h1>
+</div>
+<p>
+</p>
+</div>
+</div></div>
+<nav role="navigation">
+<div class="clearboth section" id="page_list_top" name="页面列表（顶部）"><div class="widget PageList" data-version="2" id="PageList1">
+<div class="widget-content">
+<div class="overflowable-container overflowable-4">
+<div class="overflowable-contents">
+<div class="container">
+<ul class="tabs">
+<li class="overflow-button-container" style="display: none;" aria-hidden="true"><div class="overflow-button">
+<a>更多…</a>
+</div></li><li class="overflowable-item" aria-hidden="false">
+<a href="https://eianunbits.blogspot.com/">主页</a>
+</li>
+</ul>
+</div>
+</div><div class="overflowable-backup" aria-hidden="true" style="position: absolute; visibility: hidden; inset: 0px;"><div class="overflowable-contents overflowable-backup-content">
+<div class="container">
+<ul class="tabs">
+<li class="overflowable-item">
+<a href="https://eianunbits.blogspot.com/">主页</a>
+</li>
+</ul>
+</div>
+</div></div>
+
+</div><div class="overflow-popup" style="display: none;">
+<div class="container">
+<ul class="tabs">
+<li class="overflowable-item">
+<a href="https://eianunbits.blogspot.com/">主页</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</nav>
+</div>
+</div>
+</header>
+<div>
+<div class="vertical-ad-container no-items section" id="ads" name="广告"></div>
+<main class="centered-bottom" id="main" role="main" tabindex="-1">
+<div class="main section" id="page_body" name="页面主体"><div class="widget FeaturedPost" data-version="2" id="FeaturedPost1">
+<div class="widget-content">
+<div role="feed">
+</div>
+</div>
+</div><div class="widget Blog" data-version="2" id="Blog1">
+<div class="blog-posts hfeed container">
+<article class="post-outer-container">
+<div class="post-outer">
+<div class="post">
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html"
+  },
+  "headline": "2026最全免费AI API盘点&#65281;每月白嫖16亿Token&#65292;零成本实现大模型自由&#65281;","description": "想要自己动手搭建 AI 应用&#12289;测试大模型&#65292;却总是被高昂的 API 计费账单或者 429&#65288;请求超限&#65289;错误劝退&#65311;很多折腾过 sub2api 或 newapi 这类传统中转站的玩家都知道&#65292;手动去维护不同平台的渠道连通性有多头疼&#65292;而且单独一家的免费额度根本不够用&#12290; FreeLLMAPI ...","datePublished": "2026-05-28T08:06:00+08:00",
+  "dateModified": "2026-05-28T09:53:08+08:00","image": {
+    "@type": "ImageObject","url": "https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/w1200/",
+    "height": 348,
+    "width": 1200},"publisher": {
+    "@type": "Organization",
+    "name": "Blogger",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/h60/",
+      "width": 206,
+      "height": 60
+    }
+  },"author": {
+    "@type": "Person",
+    "name": "Eianun科技碎片"
+  }
+}</script>
+<a name="4146422131100989183"></a>
+<h3 class="post-title entry-title">
+2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！
+</h3>
+<div class="post-share-buttons post-share-buttons-top">
+<div class="byline post-share-buttons goog-inline-block">
+<div aria-owns="sharing-popup-Blog1-byline-4146422131100989183" class="sharing" data-title="2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！">
+<button aria-controls="sharing-popup-Blog1-byline-4146422131100989183" aria-label="共享" class="sharing-button touch-icon-button" id="sharing-button-Blog1-byline-4146422131100989183" role="button" aria-expanded="false" aria-haspopup="true">
+<div class="flat-icon-button ripple">
+<svg class="svg-icon-24">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_share_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</button>
+<div class="share-buttons-container">
+<ul aria-hidden="true" aria-label="共享" class="share-buttons hidden" id="sharing-popup-Blog1-byline-4146422131100989183" role="menu">
+<li>
+<span aria-label="获取链接" class="sharing-platform-button sharing-element-link" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="获取链接">
+<svg class="svg-icon-24 touch-icon sharing-link">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_link_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">获取链接</span>
+</span>
+</li>
+<li>
+<span aria-label="分享到 Facebook" class="sharing-platform-button sharing-element-facebook" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=facebook" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到 Facebook">
+<svg class="svg-icon-24 touch-icon sharing-facebook">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label="分享到 X" class="sharing-platform-button sharing-element-twitter" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=twitter" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到 X">
+<svg class="svg-icon-24 touch-icon sharing-twitter">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">X</span>
+</span>
+</li>
+<li>
+<span aria-label="分享到 Pinterest" class="sharing-platform-button sharing-element-pinterest" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=pinterest" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到 Pinterest">
+<svg class="svg-icon-24 touch-icon sharing-pinterest">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label="电子邮件" class="sharing-platform-button sharing-element-email" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=email" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="电子邮件">
+<svg class="svg-icon-24 touch-icon sharing-email">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_email_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">电子邮件</span>
+</span>
+</li>
+<li aria-hidden="true" class="hidden">
+<span aria-label="分享到其他应用" class="sharing-platform-button sharing-element-other" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到其他应用">
+<svg class="svg-icon-24 touch-icon sharing-sharingOther">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">其他应用</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="post-header">
+<div class="post-header-line-1">
+<span class="byline post-timestamp">
+<meta content="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html">
+<a class="timestamp-link" href="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" rel="bookmark" title="permanent link">
+<time class="published" datetime="2026-05-28T08:06:00+08:00" title="2026-05-28T08:06:00+08:00">
+五月 28, 2026
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class="post-body entry-content float-container" id="post-body-4146422131100989183">
+<p data-pm-slice="0 0 []" style="line-height: 1.15;">想要自己动手搭建 AI 应用、测试大模型，却总是被高昂的 API 计费账单或者 429（请求超限）错误劝退？很多折腾过 sub2api 或 newapi 这类传统中转站的玩家都知道，手动去维护不同平台的渠道连通性有多头疼，而且单独一家的免费额度根本不够用。</p><p style="line-height: 1.15;"><a class="ng-star-inserted" href="https://github.com/tashfeenahmed/freellmapi" rel="noopener" target="_blank"><strong>FreeLLMAPI</strong></a></p><p style="line-height: 1.15;">这个项目堪称“白嫖党的终极武器”，它能把从各家平台申请到的免费 API 额度，全部聚合成一个“无限 Token 池”（完美兼容 OpenAI 格式）。不仅支持自动切换和负载均衡，每月整合下来的免费 Token 总量甚至能高达 <strong>16 亿</strong>！</p><p style="line-height: 1.15;">今天，整理了市面上最核心的免费 API 获取渠道，还要手把手教你在 Linux 服务器上部署这套系统，彻底实现算力自由。</p><h2 id="%E5%85%A8%E7%BD%91%E6%9C%80%E5%85%A8%E5%85%8D%E8%B4%B9-api-%E6%B8%A0%E9%81%93%E7%9B%98%E7%82%B9">全网最全免费 API 渠道盘点</h2><h3 id="1.-%E6%A0%B8%E5%BF%83%E2%80%9C%E6%AD%A3%E8%A7%84%E5%86%9B%E2%80%9D-(%E5%A4%A7%E5%8E%82%E5%85%8D%E8%B4%B9%E9%A2%9D%E5%BA%A6)">1. 核心“正规军” (大厂免费额度)</h3><p style="line-height: 1.15;">这 9个平台是稳定的主力军，建议全部注册拿下：</p><ul><li><p style="line-height: 1.15;"><strong>Google AI Studio (Gemini)</strong>：免费额度天花板，支持超长上下文，极高频率调用。👉 <a class="ng-star-inserted" href="https://aistudio.google.com/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>Groq</strong>：采用自研 LPU 芯片，全网推理速度最快，极低延迟。👉 <a class="ng-star-inserted" href="https://console.groq.com/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>GitHub Models</strong>：程序员专属羊毛，有 GitHub 账号即可免费调用 GPT-4o 等顶级模型。👉 <a class="ng-star-inserted" href="https://github.com/marketplace/models" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>OpenRouter</strong>：最强聚合平台的“Free Models”专区，常有限免惊喜。👉 <a class="ng-star-inserted" href="https://openrouter.ai/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>Mistral AI</strong>：欧洲之光，提供优质的免费 Experiment 试用计划。👉 <a class="ng-star-inserted" href="https://console.mistral.ai/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>Together AI</strong>：最强开源云算力，注册赠送额度，且部分小参数模型完全免费。👉 <a class="ng-star-inserted" href="https://api.together.ai/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>NVIDIA NIM</strong>：英伟达官方免费算力，跑分极高，适合高强度逻辑测试。👉 <a class="ng-star-inserted" href="https://build.nvidia.com/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>Cohere</strong>：RAG 与文本专家，开发者永久免费试用 Key。👉 <a class="ng-star-inserted" href="https://dashboard.cohere.com/" rel="noopener" target="_blank">申请官网</a></p></li><li><p style="line-height: 1.15;"><strong>Hugging Face Inference</strong>：开源社区的大本营，海量模型免部署直接调用。👉 <a class="ng-star-inserted" href="https://huggingface.co/settings/tokens" rel="noopener" target="_blank">申请官网</a></p></li></ul><ul><li><p><strong>Cerebras</strong>：全网推理速度天花板，专攻 Llama 3 系列极速推理，每秒能吐出上千个 Token，体验极其丝滑。</p><ul><li><p><strong>申请官网</strong>：<a class="ng-star-inserted" href="https://cloud.cerebras.ai/" rel="noopener" target="_blank">https://cloud.cerebras.ai/</a></p></li></ul></li><li><p><strong>SambaNova</strong>：同样是堆算力的狂魔，提供了极高配的开源大模型免费调用额度。</p><ul><li><p><strong>申请官网</strong>：<a class="ng-star-inserted" href="https://cloud.sambanova.ai/" rel="noopener" target="_blank">https://cloud.sambanova.ai/</a></p></li></ul></li></ul><ul><li><p><strong>Cloudflare Workers AI</strong>：白嫖 Cloudflare 遍布全球的边缘计算节点。需要你有 CF 账号，在控制台的“Workers &amp; Pages -&gt; AI”板块生成 API Token。每天都有免费调用额度。</p><ul><li><p><strong>申请官网</strong>：<a class="ng-star-inserted" href="https://dash.cloudflare.com/" rel="noopener" target="_blank">https://dash.cloudflare.com/</a></p></li></ul></li><li><p><strong>Zhipu AI (智谱)</strong>：国产大模型的绝对第一梯队（GLM 系列）。对新用户极其大方，注册就送海量 Token，而且它家最新的小参数模型（如 GLM-4-Flash）经常开放完全免费的调用。</p><ul><li><p><strong>申请官网</strong>：<a class="ng-star-inserted" href="https://open.bigmodel.cn/" rel="noopener" target="_blank">https://open.bigmodel.cn/</a></p></li></ul></li><li><p>ollama cloud <a href="https://signin.ollama.com/?client_id=client_01JX0QMHD43PFFCCNXH82A6K8B&amp;redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&amp;authorization_session_id=01KSP4GBHRNEDTA58YR6XMZ3PD" target="_blank">申请地址</a></p></li></ul><h2 id="%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2">服务器部署</h2><p style="line-height: 1.15;">把上面的 Key 准备好后，我们直接在 Linux 服务器（以 Debian/Ubuntu 为例）上把这个聚合系统跑起来。项目基于 Node.js，自带 SQLite 数据库，部署非常轻量。</p><h3 id="%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%AE%89%E8%A3%85">第一步：环境准备与基础安装</h3><h3 id="%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87%EF%BC%88%E5%AE%89%E8%A3%85-node.js-%E4%B8%8E-git%EF%BC%89">零基础前置准备（安装 Node.js 与 Git）</h3><p>如果你手里是一台刚买的纯净服务器（以最常用的 <strong>Ubuntu / Debian</strong> 系统为例），在正式开始之前，我们需要先给它装好必备的运行环境：<strong>Git</strong>（用来拉取代码）和 <strong>Node.js</strong>（用来运行项目）。</p><p>推荐的香港服务器：<a href="https://www.hncloud.com/activity/activity_2026618.html?k=Eianun" target="_blank">官网链接</a></p><div class="title-container" style="background: none rgb(249, 252, 255); box-sizing: border-box; color: #333333; display: flex; flex-shrink: 0; font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, 微软雅黑, Arial, sans-serif; font-size: 14px; gap: 10px; outline: none;"><div class="title" style="box-sizing: border-box; color: #374567; display: flex; flex-shrink: 0; font-size: 20px; font-weight: bold; outline: none;">香港云1H1G</div><div class="tags" style="box-sizing: border-box; display: flex; flex-shrink: 0; gap: 7px; outline: none;"><div class="tag tag-hot" style="align-items: center; background: linear-gradient(135deg, rgb(255, 119, 0) 0%, rgb(255, 0, 0) 100%); border-radius: 2px; box-sizing: border-box; color: white; display: flex; flex-shrink: 0; font-size: 12px; gap: 2px; justify-content: center; outline: none; padding: 0px 6px;">1.8折</div><div class="tag tag-max-num" style="align-items: center; background: rgb(225, 231, 254); border-radius: 2px; box-sizing: border-box; color: #3860f4; display: flex; flex-shrink: 0; font-size: 12px; gap: 2px; justify-content: center; outline: none; padding: 0px 6px;"><span style="background-color: #f9fcff; color: #2147a5; font-size: 14px; font-weight: bold;">50G SSD系统盘，<span style="color: #fe5f47;">2M CN2，</span>不限流</span></div></div></div><p><strong>1. 更新系统并安装 Git：</strong> 首先，我们把系统原有的软件包列表更新一下，并顺手装上 Git。在终端中复制并回车执行：</p><p>Bash</p><div class="code-toolbar"><pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span> <span class="token function">curl</span> <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 检查 Git 是否安装成功（会输出 git version x.x.x）</span>
+<span class="token function">git</span> <span class="token parameter variable">--version</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div><p><strong>2. 安装 Node.js (核心：安装 v20+ 最新版)：</strong> Linux 系统默认源自带的 Node.js 版本通常太老，跑不起来新项目。我们需要通过 NodeSource 官方源来安装推荐的 20.x 版本。依次执行以下两行命令：</p><p>Bash</p><div class="code-toolbar"><pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># 1. 下载并配置 Node.js v20 的官方源</span>
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://deb.nodesource.com/setup_20.x <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token parameter variable">-E</span> <span class="token function">bash</span> -
+
+<span class="token comment"># 2. 执行一键安装</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> nodejs
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div><p><strong>3. 验证安装结果：</strong> 安装完成后，跑一下这两行命令，确认版本号是否达标：</p><p>Bash</p><div class="code-toolbar"><pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># 检查 node 版本，如果输出 v20.x.x，说明大功告成！</span>
+<span class="token function">node</span> <span class="token parameter variable">-v</span>
+
+<span class="token comment"># 顺便检查 npm（Node 包管理器）版本</span>
+<span class="token function">npm</span> <span class="token parameter variable">-v</span></code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div><p style="line-height: 1.15;">之后确保你的服务器安装了 Node.js (推荐 v20+ 版本) 和 Git。</p><p style="line-height: 1.15;">接下来克隆项目与拉取依赖</p><p><span fontsize="" style="color: white;">Bash</span></p><div class="code-toolbar"><pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># 将项目克隆到你习惯的目录，例如 /opt </span>
+<span class="token builtin class-name">cd</span> /opt
+<span class="token function">git</span> clone https://github.com/tashfeenahmed/freellmapi.git
+
+<span class="token comment"># 进入目录并安装依赖 (会自动配置好本地数据库)</span>
+<span class="token builtin class-name">cd</span> freellmapi
+<span class="token function">npm</span> <span class="token function">install</span> 
+<span class="token function">cp</span> .env.example .env
+<span class="token builtin class-name">echo</span> <span class="token string">"ENCRYPTION_KEY=<span class="token variable"><span class="token variable">$(</span><span class="token function">node</span> <span class="token parameter variable">-e</span> "console.log<span class="token punctuation">(</span>require<span class="token punctuation">(</span><span class="token string">'crypto'</span><span class="token punctuation">)</span>.randomBytes<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span>.toString<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token variable">)</span></span>"</span><span class="token punctuation">)</span>" <span class="token operator">&gt;&gt;</span> .env
+<span class="token function">npm</span> run build
+<span class="token comment"># 启动服务和面板</span>
+<span class="token function">npm</span> run dev</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div><h3 id="%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%85%8D%E7%BD%AE-systemctl-%E5%90%8E%E5%8F%B0%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B">第二步：配置 Systemctl 后台守护进程</h3><p style="line-height: 1.15;">为了防止关掉 SSH 终端后服务断开，我们需要把它挂载为系统后台服务，实现 24 小时稳定运行及开机自启。</p><p style="line-height: 1.15;"><strong>1. 创建服务配置文件：</strong></p><p><span fontsize="" style="color: white;">Bash</span></p><pre><code class=" language-bash">sudo nano /etc/systemd/system/freellmapi.service
+</code></pre><p style="line-height: 1.15;"><strong>2. 填入以下配置：</strong></p><p style="line-height: 1.15;"><em>(注意：请确保 </em><code>WorkingDirectory</code><em> 是你实际克隆代码的路径)</em></p><p><span fontsize="" style="color: white;">Ini, TOML</span></p><pre><code class=" language-bash">[Unit]
+Description=FreeLLMAPI Proxy Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/freellmapi
+# 若使用 nvm 管理 Node，请将下方路径替换为 npm 的绝对路径
+ExecStart=/usr/bin/npm run dev
+Restart=always
+RestartSec=5
+# 默认面板端口为 3001
+Environment=PORT=3001
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p style="line-height: 1.15;"><strong>3. 启动并设置开机自启：</strong></p><p><span fontsize="" style="color: white;">Bash</span></p><pre><code class=" language-bash">sudo systemctl daemon-reload
+sudo systemctl start freellmapi
+sudo systemctl enable freellmapi
+sudo systemctl status freellmapi # 查看是否显示绿色的 active (running)
+</code></pre><p style="line-height: 1.15;">大功告成！现在浏览器访问 <code>http://你的服务器IP:3001</code>，进入管理后台填入你所有的 Key。系统会自动为你生成唯一的令牌，并开启<strong>降级路由 (Fallback Chain)</strong>：一旦某个渠道遇到限流或宕机，自动无缝切换到下一个可用节点，你的终端业务永不断线！</p><h3 id="%E6%9B%B4%E6%96%B0%E6%AD%A5%E9%AA%A4">更新步骤</h3><p style="line-height: 1.15;">后续更新只需三步，无需重配环境：</p><p><span fontsize="" style="color: white;">Bash</span></p><pre><code class=" language-bash">sudo systemctl stop freellmapi
+cd /opt/freellmapi
+git pull origin main &amp;&amp; npm install
+sudo systemctl start freellmapi
+</code></pre><p></p><p></p><p></p><blockquote><p style="line-height: 1.15;"><strong>如果你在搭建过程中遇到问题，可以去看看我配套的 YouTube 保姆级视频教程，里面有每一步的详细操作演示！</strong></p></blockquote>
+</div>
+<div class="post-bottom">
+<div class="post-footer float-container">
+<div class="post-footer-line post-footer-line-1">
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="byline post-labels">
+<span class="byline-label">
+</span>
+<a href="https://eianunbits.blogspot.com/search/label/%E7%99%BD%E5%AB%96%E6%95%99%E7%A8%8B" rel="tag">白嫖教程</a>
+<a href="https://eianunbits.blogspot.com/search/label/ai" rel="tag">ai</a>
+<a href="https://eianunbits.blogspot.com/search/label/AI%20%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B" rel="tag">AI 部署教程</a>
+<a href="https://eianunbits.blogspot.com/search/label/chatgpt" rel="tag">chatgpt</a>
+<a href="https://eianunbits.blogspot.com/search/label/gemini" rel="tag">gemini</a>
+<a href="https://eianunbits.blogspot.com/search/label/Hermes%20Agent" rel="tag">Hermes Agent</a>
+<a href="https://eianunbits.blogspot.com/search/label/vps" rel="tag">vps</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+</div>
+</div>
+<div class="post-share-buttons post-share-buttons-bottom invisible">
+<div class="byline post-share-buttons goog-inline-block">
+<div aria-owns="sharing-popup-Blog1-byline-4146422131100989183" class="sharing" data-title="2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！">
+<button aria-controls="sharing-popup-Blog1-byline-4146422131100989183" aria-label="共享" class="sharing-button touch-icon-button" id="sharing-button-Blog1-byline-4146422131100989183" role="button" aria-expanded="false" aria-haspopup="true">
+<div class="flat-icon-button ripple">
+<svg class="svg-icon-24">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_share_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</button>
+<div class="share-buttons-container">
+<ul aria-hidden="true" aria-label="共享" class="share-buttons hidden" id="sharing-popup-Blog1-byline-4146422131100989183" role="menu">
+<li>
+<span aria-label="获取链接" class="sharing-platform-button sharing-element-link" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="获取链接">
+<svg class="svg-icon-24 touch-icon sharing-link">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_link_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">获取链接</span>
+</span>
+</li>
+<li>
+<span aria-label="分享到 Facebook" class="sharing-platform-button sharing-element-facebook" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=facebook" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到 Facebook">
+<svg class="svg-icon-24 touch-icon sharing-facebook">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label="分享到 X" class="sharing-platform-button sharing-element-twitter" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=twitter" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到 X">
+<svg class="svg-icon-24 touch-icon sharing-twitter">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">X</span>
+</span>
+</li>
+<li>
+<span aria-label="分享到 Pinterest" class="sharing-platform-button sharing-element-pinterest" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=pinterest" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到 Pinterest">
+<svg class="svg-icon-24 touch-icon sharing-pinterest">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label="电子邮件" class="sharing-platform-button sharing-element-email" data-href="https://draft.blogger.com/share-post.g?blogID=1851036973524076163&amp;postID=4146422131100989183&amp;target=email" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="电子邮件">
+<svg class="svg-icon-24 touch-icon sharing-email">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_email_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">电子邮件</span>
+</span>
+</li>
+<li aria-hidden="true" class="hidden">
+<span aria-label="分享到其他应用" class="sharing-platform-button sharing-element-other" data-url="https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html" role="menuitem" tabindex="-1" title="分享到其他应用">
+<svg class="svg-icon-24 touch-icon sharing-sharingOther">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">其他应用</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="comments embed" data-num-comments="0" id="comments">
+<a name="comments"></a>
+<h3 class="title">评论</h3>
+<div id="Blog1_comments-block-wrapper">
+</div>
+<div class="footer">
+<div class="comment-form">
+<a name="comment-form"></a>
+<h4 id="comment-post-message">发表评论</h4>
+<a href="https://draft.blogger.com/comment/frame/1851036973524076163?po=4146422131100989183&amp;hl=zh-CN&amp;saa=85391&amp;origin=https%3A%2F%2Feianunbits.blogspot.com&amp;skin=essential&amp;blogspotRpcToken=3458703" id="comment-editor-src"></a>
+<iframe allowtransparency="allowtransparency" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="93px" id="comment-editor" name="comment-editor" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/1851036973524076163.html" width="100%" data-resized="true"></iframe>
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/2830521187-comment_from_post_iframe.js.下载" type="text/javascript"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://draft.blogger.com/rpc_relay.html');
+    </script>
+</div>
+</div>
+</section>
+<div class="desktop-ad mobile-ad">
+<div class="inline-ad">
+<ins class="adsbygoogle" data-ad-client="ca-pub-2160969409923714" data-ad-format="auto" data-ad-host="ca-host-pub-1556223355139109" style="/* Done in css. */">
+</ins>
+<script>
+   (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+</div>
+</article>
+</div>
+</div><div class="widget PopularPosts" data-version="2" id="PopularPosts1">
+<h3 class="title">
+此博客中的热门博文
+</h3>
+<div class="widget-content">
+<div role="feed">
+<article class="post" role="article">
+<h3 class="post-title"><a href="https://eianunbits.blogspot.com/2026/03/1tb-s3-alist.html">免费 1TB 私人网盘搭建指南：文件直链生成器 + Alist 完美挂载！</a></h3>
+<div class="post-header">
+<div class="post-header-line-1">
+<span class="byline post-timestamp">
+<meta content="https://eianunbits.blogspot.com/2026/03/1tb-s3-alist.html">
+<a class="timestamp-link" href="https://eianunbits.blogspot.com/2026/03/1tb-s3-alist.html" rel="bookmark" title="permanent link">
+<time class="published" datetime="2026-03-17T16:03:00+08:00" title="2026-03-17T16:03:00+08:00">
+三月 17, 2026
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class="item-content float-container">
+<div class="popular-posts-snippet snippet-container r-snippet-container">
+<div class="snippet-item r-snippetized">
+最近在技术圈发现了一个非常香的“羊毛”——云服务商（Hi168）注册就免费送 500GB 实名后送1T &nbsp;的 S3 对象存储空间 ！对于喜欢折腾服务器、经常需要中转大文件或分享素材的玩家来说，这简直是天降的神仙级后备仓库。 今天，我就带大家实战演示，如何将这 1TB 空间“榨干”，玩出两种截然不同用法： 轻量级玩法 ：利用 Cloudflare Workers 零成本手搓一个极简的 &nbsp;私人直链网盘 ，随时随地拖拽上传，极速获取文件直链。 终极完全体 ：将 S3 空间完美挂载到你服务器的 Alist  中，打造一个可以在线预览视频、管理目录的全功能私人云盘！ &nbsp;方案一：极客专属，Cloudflare Workers 零成本搭建专属极速云盘 如果你手里没有服务器，或者只想弄个轻量级的工具用来快速分享文件，Cloudflare Workers 是最完美的方案。 1.获取 S3 凭证与“避坑指南” 在开始之前，我们需要从服务商后台拿到 S3 的连接配置。 来到注册网站： https://www.hi168.com  注册后登陆进去-储存管理-创建储存桶-获取参数 这里有一个 极其容易踩坑的致命点 ！ 通常 S3 需要四个参数，请对照你的后台严格记录： Endpoint（端点） ： OSS服务地址 Access Key（访问密钥） ：后台密钥列表获取。 Secret Key（安全密钥） ：后台密钥列表获取。 Bucket（存储桶名称） ： 【超级大坑】  千万不要用后台显示的那个为了好看的“短桶名”（比如 webs3 ）！一定要使用系统分配的一长串 “挂载名称” （例如 hi168-30042-xxxxxx ）。API 接口只认这个底层真实的挂载名称，否则会一直报 NoSuchBucket  的错误！ 2. 创建 Worker 进入 Cloudflare 后台，新建一个 Worker，将以下代码全部复制进去并部署： &nbsp;Cloudflare Worker 源码（前后端合一） 直接复制代码的地址 ： https://blog.020915.xyz/archives/s3web 3. 创建数据库 第一步：创建一个免费的 KV 数据库 回到 Cloudflare 的主界面（Dashboard），在左侧菜单找到 Storage &amp; Data...
+</div>
+<a class="snippet-fade r-snippet-fade" href="https://eianunbits.blogspot.com/2026/03/1tb-s3-alist.html"></a>
+</div>
+<div class="jump-link flat-button ripple">
+<a href="https://eianunbits.blogspot.com/2026/03/1tb-s3-alist.html" title="免费 1TB 私人网盘搭建指南：文件直链生成器 + Alist 完美挂载！">
+阅读全文
+</a>
+</div>
+</div>
+</article>
+<article class="post" role="article">
+<h3 class="post-title"><a href="https://eianunbits.blogspot.com/2025/12/vps-ip3x-ui-cloudflare.html">一台 VPS = 美 + 港双IP：移动快乐机真实实测｜3X-UI 分流解锁 + Cloudflare 优选</a></h3>
+<div class="post-header">
+<div class="post-header-line-1">
+<span class="byline post-timestamp">
+<meta content="https://eianunbits.blogspot.com/2025/12/vps-ip3x-ui-cloudflare.html">
+<a class="timestamp-link" href="https://eianunbits.blogspot.com/2025/12/vps-ip3x-ui-cloudflare.html" rel="bookmark" title="permanent link">
+<time class="published" datetime="2025-12-08T03:44:00+08:00" title="2025-12-08T03:44:00+08:00">
+十二月 08, 2025
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class="item-content float-container">
+<div class="popular-posts-snippet snippet-container r-snippet-container">
+<div class="snippet-item r-snippetized">
+视频简介 本期带大家深度体验 TechnoVM 新推出的 香港 BGP Lite KVM VPS。 这台机器非常特别：IPv4 是美国、IPv6 是香港原生，配合 3X-UI 就能轻松实现 一台 VPS 同时拥有两种国家出口！ 内容包含： • 	 新品促销：6 折循环优惠 + 送 1 倍内存 + 25% 流量 • 	 3X-UI 分流实战： • 	 Cloudflare 套CDN，为移动/联通用户进一步提速 • 	 Netflix/Disney DNS 解锁实测 • 	 移动直连、Lumen/Cogent/IX 路线检测 • 	 购买链接（带促销码 HKLite40）： http://technovm.com/aff.php?aff=303&nbsp; 大家好，欢迎来到科技碎片的频道 我是小e 今天给大家带来一台 非常特殊 的 VPS它的 IPv4 是美国的，IPv6 却是香港原生。 这就意味着一台机器，就能当两台用！可玩性很高，可以利用3xui的分流自定义网站的落地IP 还是很有意思的 并且还是移动快乐机器 移动的用户有福了&nbsp; 我们可以看一下itdog的延迟 总体来说移动都是两位数的延迟甚至低到三十多毫秒 •虽然对于联通和电信的用户不太友好但是本期视频会教大家垃圾线路提速的方法满足大家上网冲浪的需求&nbsp; 下面是移动5g直连和联通5g提速后的测速情况 左边是用苹果机直连测的最终达到170m 右边是联通经过优化提速最高达到了490m 总体上速度方面还是很不错的，不过每个人的网络情况不同 博主这里的仅作为参考。 今天这期视频 我将给大家仔细介绍这台vps的具体情况以及如何利用3xui玩转两个IP进行分流，最后分享如何优化vps速度，并且通用于所有垃圾线路的vps 也包括nat vps也可以使用。 1. 	 vps介绍 这台机器是TechnoVM 新推出的 香港 BGP Lite KVM VPS 我们来看一下默认基础机器的参数&nbsp; vCPU 1核心 内存 512MB 系统盘 5GB SSD 流量 2TB/月 双向计费 带宽 1Gbps OS Linux IPv4 1x IPV6 /64 1x IP质量情况我用脚本跑了一下 ipv4和ipv6都是原生IP 默认提供DNS流媒体解锁NetFlix/Disney+网络质量方面ipv4移动直连效果好ipv6...
+</div>
+<a class="snippet-fade r-snippet-fade" href="https://eianunbits.blogspot.com/2025/12/vps-ip3x-ui-cloudflare.html"></a>
+</div>
+<div class="jump-link flat-button ripple">
+<a href="https://eianunbits.blogspot.com/2025/12/vps-ip3x-ui-cloudflare.html" title="一台 VPS = 美 + 港双IP：移动快乐机真实实测｜3X-UI 分流解锁 + Cloudflare 优选">
+阅读全文
+</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div></div>
+</main>
+</div>
+<footer class="footer section" id="footer" name="页脚"><div class="widget Attribution" data-version="2" id="Attribution1">
+<div class="widget-content">
+<div class="blogger">
+<a href="https://draft.blogger.com/" rel="nofollow">
+<svg class="svg-icon-24">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_post_blogger_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+由 Blogger 提供支持
+</a>
+</div>
+<div class="image-attribution">
+主题背景图片创建者：<a href="http://www.istockphoto.com/portfolio/Storman?platform=blogger">Storman</a>
+</div>
+</div>
+</div><div class="widget ReportAbuse" data-version="2" id="ReportAbuse1">
+<h3 class="title">
+<a class="report_abuse" href="https://www.blogger.com/go/report-abuse" rel="noopener nofollow" target="_blank">
+举报滥用情况
+</a>
+</h3>
+</div></footer>
+</div>
+</div>
+</div>
+<aside class="sidebar-container container sidebar-invisible show-sidebar-top" role="complementary">
+<div class="navigation">
+<button class="svg-icon-24-button flat-icon-button ripple sidebar-back">
+<svg class="svg-icon-24">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</button>
+</div>
+<div class="sidebar_top_wrapper">
+<div class="sidebar_top section" id="sidebar_top" name="边栏（顶部）"><div class="widget Profile" data-version="2" id="Profile1">
+<div class="wrapper solo">
+<div class="widget-content individual">
+<a href="https://draft.blogger.com/profile/14421524591898739898" rel="nofollow">
+<img alt="我的照片" class="profile-img" height="80" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/logo.png" width="80">
+</a>
+<div class="profile-info">
+<dl class="profile-datablock">
+<dt class="profile-data">
+<a class="profile-link g-profile" href="https://draft.blogger.com/profile/14421524591898739898" rel="author nofollow">
+Eianun科技碎片
+</a>
+</dt>
+</dl>
+<a class="profile-link visit-profile pill-button" href="https://draft.blogger.com/profile/14421524591898739898" rel="author">
+访问个人资料
+</a>
+</div>
+</div>
+</div>
+</div></div>
+</div>
+<div class="sidebar_bottom section" id="sidebar_bottom" name="边栏（底部）"><div class="widget LinkList" data-version="2" id="LinkList1">
+<h3 class="title">
+社交媒体
+</h3>
+<div class="widget-content">
+<ul>
+<li><a href="https://www.youtube.com/channel/UCgpUTP0UcL3FqZ6W7d7dmWg">YouTube</a></li>
+<li><a href="https://t.me/eianunkeji">telegram</a></li>
+</ul>
+</div>
+</div><div class="widget BlogArchive" data-version="2" id="BlogArchive1">
+<details class="collapsible extendable">
+<summary>
+<div class="collapsible-title">
+<h3 class="title">
+归档
+</h3>
+<svg class="svg-icon-24 chevron-down">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_more_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<svg class="svg-icon-24 chevron-up">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_less_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</summary>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<div class="first-items">
+<ul class="flat">
+<li class="archivedate">
+<a href="https://eianunbits.blogspot.com/2026/05/">五月 2026<span class="post-count">2</span></a>
+</li>
+<li class="archivedate">
+<a href="https://eianunbits.blogspot.com/2026/04/">四月 2026<span class="post-count">2</span></a>
+</li>
+<li class="archivedate">
+<a href="https://eianunbits.blogspot.com/2026/03/">三月 2026<span class="post-count">1</span></a>
+</li>
+<li class="archivedate">
+<a href="https://eianunbits.blogspot.com/2025/12/">十二月 2025<span class="post-count">6</span></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div><div class="widget Label" data-version="2" id="Label1">
+<details class="collapsible extendable version-1-0-1">
+<summary>
+<div class="collapsible-title">
+<h3 class="title">
+标签
+</h3>
+<svg class="svg-icon-24 chevron-down">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_more_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<svg class="svg-icon-24 chevron-up">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_less_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</summary>
+<div class="widget-content list-label-widget-content">
+<div class="first-items">
+<ul>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E7%99%BD%E5%AB%96%E6%95%99%E7%A8%8B">白嫖教程</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E4%BF%9D%E5%8F%B7">保号</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E6%9C%8D%E5%8A%A1%E5%99%A8">服务器</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E5%85%8D%E8%B4%B9%20Claude%20API">免费 Claude API</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1">企业微信</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E8%BD%AF%E8%B7%AF%E7%94%B1">软路由</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E6%89%8B%E6%9C%BA">手机</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E6%8F%90%E9%86%92%E4%BA%8B%E9%A1%B9">提醒事项</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7">效率工具</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E8%87%AA%E5%BB%BA%E6%9C%8D%E5%8A%A1">自建服务</a></li>
+</ul>
+</div>
+<div class="remaining-items">
+<ul>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/%E8%87%AA%E6%89%98%E7%AE%A1">自托管</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/ai">ai</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/AI%20%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B">AI 部署教程</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/Alist">Alist</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/andriod">andriod</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/API%20%E4%B8%AD%E8%BD%AC">API 中转</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/Bark">Bark</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/chatgpt">chatgpt</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/Claude%20Opus%204.7">Claude Opus 4.7</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/cloudflare">cloudflare</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/Docker%20%E5%AE%B9%E5%99%A8">Docker 容器</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/eSIM">eSIM</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/gemini">gemini</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/giffgaff">giffgaff</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/Hermes%20Agent">Hermes Agent</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/ip">ip</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/openclaw">openclaw</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/S3%E5%AD%98%E5%82%A8">S3存储</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/sub2api">sub2api</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/SubsTracker">SubsTracker</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/termux">termux</a></li>
+<li><a class="label-name" href="https://eianunbits.blogspot.com/search/label/vps">vps</a></li>
+</ul>
+</div>
+<span class="show-more pill-button">显示更多</span>
+<span class="show-less hidden pill-button">隐藏部分</span>
+</div>
+</details>
+</div><div class="widget Stats" data-version="2" id="Stats1">
+<h3 class="title">
+网页浏览总次数
+</h3>
+<div class="widget-content">
+<div id="Stats1_content" style="">
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/loader(1).js.下载" type="text/javascript"></script>
+<span id="Stats1_sparklinespan" style="display:inline-block; width:75px; height:30px"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 75px; height: 30px;"><div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;" aria-label="A chart."><svg width="75" height="30" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_0"><clippath id="_ABSTRACT_RENDERER_ID_1"><rect x="0" y="0" width="75" height="30"></rect></clippath></defs><rect x="0" y="0" width="75" height="30" stroke="none" stroke-width="0" fill-opacity="0.1" fill="#000000"></rect><g><rect x="0" y="0" width="75" height="30" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html#_ABSTRACT_RENDERER_ID_1)"><g><g><path d="M0.5,29.5L0.5,29.5L0.5,28.304123711340207L3.0517241379310347,28.603092783505154L5.603448275862069,28.603092783505154L8.155172413793103,28.9020618556701L10.706896551724139,29.201030927835053L13.258620689655174,28.304123711340207L15.810344827586208,27.70618556701031L18.362068965517242,28.9020618556701L20.913793103448278,27.70618556701031L23.465517241379313,28.603092783505154L26.01724137931035,28.603092783505154L28.56896551724138,28.304123711340207L31.120689655172416,28.9020618556701L33.67241379310345,28.9020618556701L36.224137931034484,28.603092783505154L38.77586206896552,28.603092783505154L41.327586206896555,27.40721649484536L43.87931034482759,28.00515463917526L46.431034482758626,28.00515463917526L48.98275862068966,26.211340206185568L51.5344827586207,22.02577319587629L54.08620689655173,0.5L56.63793103448276,6.180412371134022L59.1896551724138,16.34536082474227L61.74137931034483,14.850515463917526L64.29310344827587,20.530927835051546L66.8448275862069,17.54123711340206L69.39655172413794,18.73711340206186L71.94827586206897,16.04639175257732L74.5,27.70618556701031L74.5,29.5L74.5,29.5Z" stroke="none" stroke-width="0" fill-opacity="0.3" fill="#202020"></path></g></g><g><rect x="0" y="0" width="1" height="30" stroke="none" stroke-width="0" fill="#333333"></rect><rect x="0" y="29" width="75" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><path d="M0.5,28.304123711340207L3.0517241379310347,28.603092783505154L5.603448275862069,28.603092783505154L8.155172413793103,28.9020618556701L10.706896551724139,29.201030927835053L13.258620689655174,28.304123711340207L15.810344827586208,27.70618556701031L18.362068965517242,28.9020618556701L20.913793103448278,27.70618556701031L23.465517241379313,28.603092783505154L26.01724137931035,28.603092783505154L28.56896551724138,28.304123711340207L31.120689655172416,28.9020618556701L33.67241379310345,28.9020618556701L36.224137931034484,28.603092783505154L38.77586206896552,28.603092783505154L41.327586206896555,27.40721649484536L43.87931034482759,28.00515463917526L46.431034482758626,28.00515463917526L48.98275862068966,26.211340206185568L51.5344827586207,22.02577319587629L54.08620689655173,0.5L56.63793103448276,6.180412371134022L59.1896551724138,16.34536082474227L61.74137931034483,14.850515463917526L64.29310344827587,20.530927835051546L66.8448275862069,17.54123711340206L69.39655172413794,18.73711340206186L71.94827586206897,16.04639175257732L74.5,27.70618556701031" stroke="#202020" stroke-width="2" fill-opacity="1" fill="none"></path></g></g><g></g></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>0</td><td>4</td></tr><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>2</td></tr><tr><td>4</td><td>1</td></tr><tr><td>5</td><td>4</td></tr><tr><td>6</td><td>6</td></tr><tr><td>7</td><td>2</td></tr><tr><td>8</td><td>6</td></tr><tr><td>9</td><td>3</td></tr><tr><td>10</td><td>3</td></tr><tr><td>11</td><td>4</td></tr><tr><td>12</td><td>2</td></tr><tr><td>13</td><td>2</td></tr><tr><td>14</td><td>3</td></tr><tr><td>15</td><td>3</td></tr><tr><td>16</td><td>7</td></tr><tr><td>17</td><td>5</td></tr><tr><td>18</td><td>5</td></tr><tr><td>19</td><td>11</td></tr><tr><td>20</td><td>25</td></tr><tr><td>21</td><td>97</td></tr><tr><td>22</td><td>78</td></tr><tr><td>23</td><td>44</td></tr><tr><td>24</td><td>49</td></tr><tr><td>25</td><td>30</td></tr><tr><td>26</td><td>40</td></tr><tr><td>27</td><td>36</td></tr><tr><td>28</td><td>45</td></tr><tr><td>29</td><td>6</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 40px; left: 85px; white-space: nowrap; font-family: Arial; font-size: 6px; font-weight: bold;"></div><div></div></div></span>
+<span class="counter-wrapper text-counter-wrapper" id="Stats1_totalCount">3,382</span>
+</div>
+</div>
+</div></div>
+</aside>
+<script type="text/javascript" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/396686643-strm_compiled.js.下载" async="true"></script>
+<link href="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-tomorrow.min.css" rel="stylesheet">
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism.min.js.下载"></script>
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-bash.min.js.下载"></script>
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-json.min.js.下载"></script>
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-yaml.min.js.下载"></script>
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-python.min.js.下载"></script>
+<link href="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-toolbar.min.css" rel="stylesheet">
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-toolbar.min.js.下载"></script>
+<script src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/prism-copy-to-clipboard.min.js.下载"></script>
+<script type="text/javascript">
+    //<![CDATA[
+      document.addEventListener("DOMContentLoaded", function() {
+        // 查找文章区域内所有的 <pre> 标签
+        var preTags = document.querySelectorAll(".post-body pre");
+        
+        preTags.forEach(function(pre) {
+          // 情况 1: 如果 <pre> 里面没有 <code> 标签
+          var codeTag = pre.querySelector("code");
+          if (!codeTag) {
+            var content = pre.innerHTML;
+            pre.innerHTML = '';
+            var newCode = document.createElement("code");
+            newCode.innerHTML = content;
+            newCode.className = "language-bash"; 
+            pre.appendChild(newCode);
+            codeTag = newCode;
+          }
+          
+          // 情况 2: 如果有 <code> 标签，但是没有指定 language-xxx 类名
+          if (!codeTag.className || !codeTag.className.includes("language-")) {
+             codeTag.className += " language-bash";
+          }
+        });
+        
+        // 修正逻辑：由于 Prism 有时候加载快慢不一，我们稍微延迟一点点强制重绘
+        setTimeout(function() {
+            if (typeof Prism !== 'undefined') {
+                Prism.highlightAll();
+            }
+        }, 100);
+      });
+    //]]>
+    </script>
+
+<script type="text/javascript" src="./2026最全免费AI API盘点！每月白嫖16亿Token，零成本实现大模型自由！_files/387437488-widgets.js.下载"></script>
+<script type="text/javascript">
+window['__wavt'] = 'AEUoTZq9csobQgMohFuyJcqbAJRs:1780809232511';_WidgetManager._Init('//draft.blogger.com/rearrange?blogID\x3d1851036973524076163','//eianunbits.blogspot.com/2026/05/2026ai-api16token.html','1851036973524076163');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '1851036973524076163', 'title': 'Eianun\u79d1\u6280\u788e\u7247', 'url': 'https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html', 'canonicalUrl': 'https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html', 'homepageUrl': 'https://eianunbits.blogspot.com/', 'searchUrl': 'https://eianunbits.blogspot.com/search', 'canonicalHomepageUrl': 'https://eianunbits.blogspot.com/', 'blogspotFaviconUrl': 'https://eianunbits.blogspot.com/favicon.ico', 'bloggerUrl': 'https://draft.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'zh-CN', 'localeUnderscoreDelimited': 'zh_cn', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Eianun\u79d1\u6280\u788e\u7247 - Atom\x22 href\x3d\x22https://eianunbits.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Eianun\u79d1\u6280\u788e\u7247 - RSS\x22 href\x3d\x22https://eianunbits.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Eianun\u79d1\u6280\u788e\u7247 - Atom\x22 href\x3d\x22https://draft.blogger.com/feeds/1851036973524076163/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Eianun\u79d1\u6280\u788e\u7247 - Atom\x22 href\x3d\x22https://eianunbits.blogspot.com/feeds/4146422131100989183/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-2160969409923714', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': true, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/391c97000598ac6c', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': '\u83b7\u53d6\u94fe\u63a5', 'key': 'link', 'shareMessage': '\u83b7\u53d6\u94fe\u63a5', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': '\u5206\u4eab\u5230 Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': '\u5206\u4eab\u5230 X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': '\u5206\u4eab\u5230 Pinterest', 'target': 'pinterest'}, {'name': '\u7535\u5b50\u90ae\u4ef6', 'key': 'email', 'shareMessage': '\u7535\u5b50\u90ae\u4ef6', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27zh_CN\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': '\u9605\u8bfb\u5168\u6587', 'pageType': 'item', 'postId': '4146422131100989183', 'pageName': '2026\u6700\u5168\u514d\u8d39AI API\u76d8\u70b9\uff01\u6bcf\u6708\u767d\u5ad616\u4ebfToken\uff0c\u96f6\u6210\u672c\u5b9e\u73b0\u5927\u6a21\u578b\u81ea\u7531\uff01', 'pageTitle': 'Eianun\u79d1\u6280\u788e\u7247: 2026\u6700\u5168\u514d\u8d39AI API\u76d8\u70b9\uff01\u6bcf\u6708\u767d\u5ad616\u4ebfToken\uff0c\u96f6\u6210\u672c\u5b9e\u73b0\u5927\u6a21\u578b\u81ea\u7531\uff01'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': '\u4fee\u6539', 'linkCopiedToClipboard': '\u94fe\u63a5\u5df2\u590d\u5236\u5230\u526a\u8d34\u677f\uff01', 'ok': '\u786e\u5b9a', 'postLink': '\u535a\u6587\u94fe\u63a5'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': '\u81ea\u5b9a\u4e49', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': '2026\u6700\u5168\u514d\u8d39AI API\u76d8\u70b9\uff01\u6bcf\u6708\u767d\u5ad616\u4ebfToken\uff0c\u96f6\u6210\u672c\u5b9e\u73b0\u5927\u6a21\u578b\u81ea\u7531\uff01', 'description': '\u60f3\u8981\u81ea\u5df1\u52a8\u624b\u642d\u5efa AI \u5e94\u7528\u3001\u6d4b\u8bd5\u5927\u6a21\u578b\uff0c\u5374\u603b\u662f\u88ab\u9ad8\u6602\u7684 API \u8ba1\u8d39\u8d26\u5355\u6216\u8005 429\uff08\u8bf7\u6c42\u8d85\u9650\uff09\u9519\u8bef\u529d\u9000\uff1f\u5f88\u591a\u6298\u817e\u8fc7 sub2api \u6216 newapi \u8fd9\u7c7b\u4f20\u7edf\u4e2d\u8f6c\u7ad9\u7684\u73a9\u5bb6\u90fd\u77e5\u9053\uff0c\u624b\u52a8\u53bb\u7ef4\u62a4\u4e0d\u540c\u5e73\u53f0\u7684\u6e20\u9053\u8fde\u901a\u6027\u6709\u591a\u5934\u75bc\uff0c\u800c\u4e14\u5355\u72ec\u4e00\u5bb6\u7684\u514d\u8d39\u989d\u5ea6\u6839\u672c\u4e0d\u591f\u7528\u3002 FreeLLMAPI ...', 'url': 'https://eianunbits.blogspot.com/2026/05/2026ai-api16token.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 4146422131100989183}}, {'name': 'widgets', 'data': [{'title': 'Eianun\u79d1\u6280\u788e\u7247 (\u6807\u9898)', 'type': 'Header', 'sectionId': 'header', 'id': 'Header1'}, {'title': '', 'type': 'PageList', 'sectionId': 'page_list_top', 'id': 'PageList1'}, {'title': '', 'type': 'FeaturedPost', 'sectionId': 'page_body', 'id': 'FeaturedPost1', 'postId': '4146422131100989183'}, {'title': '\u535a\u6587', 'type': 'Blog', 'sectionId': 'page_body', 'id': 'Blog1', 'posts': [{'id': '4146422131100989183', 'title': '2026\u6700\u5168\u514d\u8d39AI API\u76d8\u70b9\uff01\u6bcf\u6708\u767d\u5ad616\u4ebfToken\uff0c\u96f6\u6210\u672c\u5b9e\u73b0\u5927\u6a21\u578b\u81ea\u7531\uff01', 'showInlineAds': true}], 'headerByline': {'regionName': 'header1', 'items': [{'name': 'share', 'label': ''}, {'name': 'timestamp', 'label': ''}]}, 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'comments', 'label': '\u8bc4\u8bba'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': ''}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': '\u5730\u70b9:'}]}], 'allBylineItems': [{'name': 'share', 'label': ''}, {'name': 'timestamp', 'label': ''}, {'name': 'comments', 'label': '\u8bc4\u8bba'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': ''}, {'name': 'location', 'label': '\u5730\u70b9:'}]}, {'title': '', 'type': 'PopularPosts', 'sectionId': 'page_body', 'id': 'PopularPosts1', 'posts': [{'title': '2026\u6700\u5168\u514d\u8d39AI API\u76d8\u70b9\uff01\u6bcf\u6708\u767d\u5ad616\u4ebfToken\uff0c\u96f6\u6210\u672c\u5b9e\u73b0\u5927\u6a21\u578b\u81ea\u7531\uff01', 'id': 4146422131100989183}, {'title': '\u514d\u8d39 1TB \u79c1\u4eba\u7f51\u76d8\u642d\u5efa\u6307\u5357\uff1a\u6587\u4ef6\u76f4\u94fe\u751f\u6210\u5668 + Alist \u5b8c\u7f8e\u6302\u8f7d\uff01', 'id': 3856277178152859264}, {'title': '\u4e00\u53f0 VPS \x3d \u7f8e + \u6e2f\u53ccIP\uff1a\u79fb\u52a8\u5feb\u4e50\u673a\u771f\u5b9e\u5b9e\u6d4b\uff5c3X-UI \u5206\u6d41\u89e3\u9501 + Cloudflare \u4f18\u9009', 'id': 6272464390356157198}]}, {'type': 'Attribution', 'sectionId': 'footer', 'id': 'Attribution1'}, {'title': '', 'type': 'ReportAbuse', 'sectionId': 'footer', 'id': 'ReportAbuse1'}, {'title': '\u6211\u7684\u7b80\u4ecb', 'type': 'Profile', 'sectionId': 'sidebar_top', 'id': 'Profile1'}, {'title': '\u793e\u4ea4\u5a92\u4f53', 'type': 'LinkList', 'sectionId': 'sidebar_bottom', 'id': 'LinkList1'}, {'title': '', 'type': 'BlogArchive', 'sectionId': 'sidebar_bottom', 'id': 'BlogArchive1'}, {'title': '\u6807\u7b7e', 'type': 'Label', 'sectionId': 'sidebar_bottom', 'id': 'Label1'}, {'title': '\u7f51\u9875\u6d4f\u89c8\u603b\u6b21\u6570', 'type': 'Stats', 'sectionId': 'sidebar_bottom', 'id': 'Stats1'}]}]);
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'page_list_top', document.getElementById('PageList1'), {'title': '', 'links': [{'isCurrentPage': false, 'href': 'https://eianunbits.blogspot.com/', 'title': '\u4e3b\u9875'}], 'mobile': false, 'showPlaceholder': true, 'hasCurrentPage': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeaturedPostView', new _WidgetInfo('FeaturedPost1', 'page_body', document.getElementById('FeaturedPost1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'page_body', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/3534753152-lbx__zh_cn.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/828616780-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PopularPostsView', new _WidgetInfo('PopularPosts1', 'page_body', document.getElementById('PopularPosts1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer', document.getElementById('Attribution1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ReportAbuseView', new _WidgetInfo('ReportAbuse1', 'footer', document.getElementById('ReportAbuse1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ProfileView', new _WidgetInfo('Profile1', 'sidebar_top', document.getElementById('Profile1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebar_bottom', document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar_bottom', document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': '\u6b63\u5728\u52a0\u8f7d\u2026'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar_bottom', document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_StatsView', new _WidgetInfo('Stats1', 'sidebar_bottom', document.getElementById('Stats1'), {'title': '\u7f51\u9875\u6d4f\u89c8\u603b\u6b21\u6570', 'showGraphicalCounter': false, 'showAnimatedCounter': false, 'showSparkline': true, 'statsUrl': '//eianunbits.blogspot.com/b/stats?style\x3dBLACK_TRANSPARENT\x26timeRange\x3dALL_TIME\x26token\x3dANZsN399Ajo2mwlArx6Xae20ZMBeYKTl63GURj6nQVtb6MPjihosDC-8KIBwOT6eVoaT0mXvU152Aa_V4ESHt-I'}, 'displayModeFull'));
+</script>
+
+<div class="dim-overlay hidden" id="subscribe-dim-overlay"></div><div class="dim-overlay hidden"></div></body></html>
